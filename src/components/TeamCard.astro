@@ -1,0 +1,94 @@
+---
+import type { TeamMember } from '../data/team';
+
+interface Props {
+  member: TeamMember;
+  index?: number;
+  layout?: 'grid' | 'featured';
+}
+const { member, index = 0, layout = 'grid' } = Astro.props;
+
+// Per-member photo position overrides (id → CSS object-position value)
+const photoPositions: Record<string, string> = {
+  'ammar-ahmad': 'center center',
+};
+const photoPosition = photoPositions[member.id] ?? 'top center';
+---
+
+<article
+  class:list={['team-card card reveal', { 'team-card--featured': layout === 'featured' }]}
+  style={`transition-delay: ${index * 0.08}s`}
+  itemscope
+  itemtype="https://schema.org/Person"
+>
+  <div class="card-photo-wrap">
+    <img
+      src={member.image}
+      alt={`${member.name} — ${member.title} at Qignite`}
+      class="card-photo"
+      style={`object-position: ${photoPosition}`}
+      width="300"
+      height="300"
+      loading="lazy"
+      decoding="async"
+      itemprop="image"
+    />
+    <div class="card-photo-glow" aria-hidden="true"></div>
+    <span class="card-role-badge">{member.role}</span>
+  </div>
+
+  <div class="card-body">
+    <div class="card-header">
+      <h3 class="card-name" itemprop="name">{member.name}</h3>
+      <p class="card-title" itemprop="jobTitle">{member.title}</p>
+    </div>
+
+    <p class="card-bio">{member.bio}</p>
+
+    <div class="card-footer">
+      <p class="card-tagline">"{member.tagline}"</p>
+      {member.upwork && (
+        <a
+          href={member.upwork}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="card-upwork-link"
+          aria-label={`${member.name} on Upwork`}
+        >
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path d="M18.561 13.158c-1.102 0-2.135-.467-3.074-1.227l.228-1.076.008-.042c.207-1.143.849-3.06 2.839-3.06 1.492 0 2.703 1.212 2.703 2.703-.001 1.489-1.212 2.702-2.704 2.702zm0-8.14c-2.539 0-4.51 1.649-5.31 4.366-1.22-1.834-2.148-4.036-2.687-5.892H7.828v7.112c-.002 1.406-1.141 2.546-2.547 2.546-1.405 0-2.543-1.14-2.545-2.546V3.492H0v7.112c0 2.914 2.37 5.303 5.281 5.303 2.913 0 5.283-2.389 5.283-5.303v-1.19c.529 1.107 1.182 2.229 1.974 3.221l-1.673 7.873h2.797l1.213-5.71c1.063.679 2.285 1.109 3.686 1.109 3 0 5.439-2.452 5.439-5.45 0-3-2.439-5.439-5.439-5.439z"/>
+          </svg>
+          View on Upwork
+        </a>
+      )}
+    </div>
+  </div>
+</article>
+
+<style>
+.team-card { display: flex; flex-direction: column; overflow: hidden; }
+.card-photo-wrap { position: relative; aspect-ratio: 1; overflow: hidden; border-radius: var(--radius-md) var(--radius-md) 0 0; }
+.card-photo { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s var(--ease); }
+.team-card:hover .card-photo { transform: scale(1.05); }
+.card-photo-glow { position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,200,255,0.15) 0%, transparent 60%); }
+.card-role-badge {
+  position: absolute; bottom: 0.75rem; left: 0.75rem;
+  font-size: 0.7rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase;
+  padding: 0.3rem 0.75rem; border-radius: 100px;
+  background: rgba(0,200,255,0.15); border: 1px solid rgba(0,200,255,0.3);
+  color: var(--clr-accent); backdrop-filter: blur(8px);
+}
+.card-body { display: flex; flex-direction: column; gap: 1rem; padding: 1.5rem; flex: 1; }
+.card-name { font-size: 1.25rem; font-weight: 700; color: var(--clr-text); margin-bottom: 0.25rem; }
+.card-title { font-size: 0.85rem; color: var(--clr-accent); font-weight: 500; }
+.card-bio { font-size: 0.88rem; color: var(--clr-muted); line-height: 1.7; flex: 1; }
+.card-footer { margin-top: auto; padding-top: 1rem; border-top: 1px solid var(--clr-border); }
+.card-tagline { font-size: 0.78rem; font-style: italic; color: var(--clr-muted); line-height: 1.5; }
+.card-upwork-link {
+  display: inline-flex; align-items: center; gap: 0.4rem;
+  margin-top: 0.75rem; font-size: 0.78rem; font-weight: 600;
+  color: #6fda44; text-decoration: none; letter-spacing: 0.02em;
+  transition: opacity 0.2s;
+}
+.card-upwork-link:hover { opacity: 0.75; }
+</style>

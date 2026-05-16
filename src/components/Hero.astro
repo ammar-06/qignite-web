@@ -1,0 +1,112 @@
+---
+import QigniteHero from './QigniteHero.tsx';
+
+interface Props {
+  sub?: string;
+  ctaPrimary?: { label: string; href: string };
+  ctaSecondary?: { label: string; href: string };
+  video?: string;
+}
+
+const {
+  sub,
+  ctaPrimary  = { label: 'Explore Services', href: '/services' },
+  ctaSecondary = { label: 'Meet the Team', href: '/team' },
+  video = 'hero-bg.mp4',
+} = Astro.props;
+---
+
+<section class="hero">
+  <div class="video-bg-wrap" aria-hidden="true">
+    <video autoplay muted loop playsinline preload="none" aria-hidden="true">
+      <source src={`/videos/${video}`} type="video/mp4" />
+    </video>
+  </div>
+
+  <div class="hero-overlay" aria-hidden="true"></div>
+  <div class="hero-grid" aria-hidden="true"></div>
+
+  <div class="container hero-content">
+    <!-- Fancy animated Qignite brand -->
+    <div class="qignite-brand-wrap">
+      <QigniteHero client:load />
+    </div>
+
+    {sub && <p class="hero-sub">{sub}</p>}
+
+    <div class="hero-ctas">
+      <a href={ctaPrimary.href} class="btn btn-primary">
+        {ctaPrimary.label}
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+      <a href={ctaSecondary.href} class="btn btn-outline">{ctaSecondary.label}</a>
+    </div>
+  </div>
+
+  <div class="orb orb-1" aria-hidden="true"></div>
+  <div class="orb orb-2" aria-hidden="true"></div>
+</section>
+
+<style>
+.hero {
+  position: relative;
+  min-height: 100svh;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+}
+.hero-overlay {
+  position: absolute; inset: 0; z-index: 1;
+  background:
+    linear-gradient(to right, var(--clr-bg) 0%, rgba(2,9,24,0.6) 60%, transparent 100%),
+    linear-gradient(to top, var(--clr-bg) 0%, transparent 40%);
+}
+.hero-grid {
+  position: absolute; inset: 0; z-index: 1;
+  background-image:
+    linear-gradient(var(--clr-border) 1px, transparent 1px),
+    linear-gradient(90deg, var(--clr-border) 1px, transparent 1px);
+  background-size: 60px 60px;
+  opacity: 0.5;
+  mask-image: radial-gradient(ellipse 70% 80% at 50% 50%, black 30%, transparent 80%);
+}
+.hero-content {
+  position: relative; z-index: 2;
+  padding-top: 9rem;
+  padding-bottom: 6rem;
+  max-width: 900px;
+}
+.qignite-brand-wrap {
+  position: relative;
+  margin-bottom: 1.75rem;
+}
+.hero-sub {
+  font-size: clamp(1rem, 2vw, 1.2rem);
+  color: var(--clr-muted);
+  max-width: 540px;
+  line-height: 1.75;
+  margin-bottom: 2.5rem;
+  animation: heroIn 1s 0.85s var(--ease) both;
+}
+.hero-ctas {
+  display: flex; flex-wrap: wrap; gap: 1rem;
+  animation: heroIn 1s 1s var(--ease) both;
+}
+
+/* Orbs */
+.orb { position: absolute; border-radius: 50%; filter: blur(100px); pointer-events: none; z-index: 1; }
+.orb-1 { width: 600px; height: 600px; background: radial-gradient(circle, rgba(0,200,255,0.12), transparent 70%); top: -100px; right: -150px; animation: orbFloat 8s ease-in-out infinite; }
+.orb-2 { width: 400px; height: 400px; background: radial-gradient(circle, rgba(59,111,255,0.10), transparent 70%); bottom: 0; left: 30%; animation: orbFloat 10s 2s ease-in-out infinite reverse; }
+
+@keyframes heroIn {
+  from { opacity: 0; transform: translateY(30px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes orbFloat {
+  0%, 100% { transform: translateY(0) scale(1); }
+  50%        { transform: translateY(-30px) scale(1.05); }
+}
+@media (max-width: 640px) {
+  .hero-content { padding-top: 7rem; }
+}
+</style>

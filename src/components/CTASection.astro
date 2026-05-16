@@ -1,0 +1,93 @@
+---
+interface Props {
+  headline?: string;
+  sub?: string;
+  ctaLabel?: string;
+  ctaHref?: string;
+  ctaSecLabel?: string;
+  ctaSecHref?: string;
+  video?: string;
+}
+
+const {
+  headline   = "Ready to Elevate Your Software Quality?",
+  sub        = "Partner with Qignite to build AI-powered QA workflows that ship better products faster.",
+  ctaLabel   = "Start a Conversation",
+  ctaHref    = "/contact",
+  ctaSecLabel = "View Services",
+  ctaSecHref  = "/services",
+  video,
+} = Astro.props;
+---
+
+<section class="cta-section section" aria-label="Call to action">
+  {video && (
+    <div class="video-bg-wrap" aria-hidden="true">
+      <video autoplay muted loop playsinline preload="none">
+        <source src={`/videos/${video}`} type="video/mp4" />
+      </video>
+    </div>
+  )}
+
+  <div class="cta-bg" aria-hidden="true"></div>
+
+  <div class="container cta-inner">
+    <div class="cta-badge reveal">
+      <span class="cta-badge-dot" aria-hidden="true"></span>
+      Let's Build Together
+    </div>
+    <h2 class="display-lg cta-headline reveal">{headline}</h2>
+    <p class="cta-sub reveal">{sub}</p>
+    <div class="cta-actions reveal">
+      <a href={ctaHref} class="btn btn-primary btn-lg">
+        {ctaLabel}
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+          <path d="M5 12h14M12 5l7 7-7 7"/>
+        </svg>
+      </a>
+      <a href={ctaSecHref} class="btn btn-outline btn-lg">{ctaSecLabel}</a>
+    </div>
+  </div>
+</section>
+
+<style>
+.cta-section {
+  position: relative;
+  text-align: center;
+  overflow: hidden;
+}
+.cta-bg {
+  position: absolute; inset: 0;
+  background:
+    radial-gradient(ellipse 60% 80% at 50% 50%, rgba(0,200,255,0.08), transparent 70%),
+    radial-gradient(ellipse 40% 40% at 80% 20%, rgba(59,111,255,0.08), transparent);
+}
+.cta-inner {
+  position: relative; z-index: 1;
+  max-width: 720px; margin: 0 auto;
+  display: flex; flex-direction: column; align-items: center; gap: 1.5rem;
+}
+.cta-badge {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  font-size: 0.8rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--clr-accent); padding: 0.4rem 1rem;
+  border: 1px solid var(--clr-border); border-radius: 100px;
+  background: var(--clr-accent-dim);
+}
+.cta-badge-dot {
+  width: 6px; height: 6px; border-radius: 50%;
+  background: var(--clr-accent);
+  animation: pulse 2s infinite;
+}
+.cta-headline { max-width: 620px; }
+.cta-sub {
+  font-size: 1.05rem; color: var(--clr-muted); line-height: 1.7; max-width: 500px;
+}
+.cta-actions { display: flex; flex-wrap: wrap; gap: 1rem; justify-content: center; }
+.btn-lg { padding: 1rem 2.25rem; font-size: 1rem; }
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50%        { opacity: 0.5; transform: scale(0.8); }
+}
+</style>

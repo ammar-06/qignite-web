@@ -1,0 +1,146 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Hero from '../components/Hero.astro';
+import Stats from '../components/Stats.astro';
+import ServiceCard from '../components/ServiceCard.astro';
+import TeamCard from '../components/TeamCard.astro';
+import CTASection from '../components/CTASection.astro';
+import { services } from '../data/services';
+import { team } from '../data/team';
+
+const featuredTeam = team.slice(0, 3);
+
+const pageSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'WebPage',
+  name: 'Qignite — AI-Driven QA Solutions',
+  description: 'AI-driven software quality assurance for healthcare and enterprise platforms.',
+  url: 'https://qignite.com/',
+};
+---
+
+<Layout
+  title="Qignite - Software Quality Assurance"
+  description="Qignite delivers AI-powered QA engineering and intelligent customer support for healthcare systems and enterprise platforms. Smarter testing. Better software. Faster delivery."
+  keywords="AI QA, software quality assurance, automated testing, healthcare QA, enterprise testing, AI testing tools, bug detection, test automation Pakistan"
+  structuredData={pageSchema}
+>
+  <Hero
+    sub="We engineer intelligent QA systems that detect more bugs, ship faster releases, and deliver software your users can trust across healthcare and enterprise platforms worldwide."
+    ctaPrimary={{ label: 'Explore Services', href: '/services' }}
+    ctaSecondary={{ label: 'Meet the Team', href: '/team' }}
+    video="hero-bg.mp4"
+  />
+
+  <Stats />
+
+  <section class="section services-preview has-video-bg" aria-labelledby="services-heading">
+    <div class="video-bg-wrap" aria-hidden="true">
+      <video autoplay muted loop playsinline preload="none">
+        <source src="/videos/services-preview-bg.mp4" type="video/mp4" />
+      </video>
+    </div>
+    <div class="bg-overlay" aria-hidden="true"></div>
+
+    <div class="container content-on-top">
+      <div class="section-header reveal-left">
+        <span class="section-tag">What We Do</span>
+        <h2 class="display-md" id="services-heading">
+          QA Solutions Built for <span class="text-accent">Modern Software</span>
+        </h2>
+        <p class="text-muted" style="margin-top:1rem; font-size:1rem; line-height:1.75; max-width:580px;">
+          From AI-powered test automation to intelligent customer support, Qignite brings next-generation quality engineering to your product lifecycle.
+        </p>
+      </div>
+      <div class="services-grid">
+        {services.map((s, i) => <ServiceCard service={s} index={i} />)}
+      </div>
+      <div style="text-align:center; margin-top:3rem;" class="reveal">
+        <a href="/services" class="btn btn-outline">View All Services →</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="about-strip section" aria-labelledby="about-strip-heading">
+    <div class="about-strip-video" aria-hidden="true">
+      <video autoplay muted loop playsinline preload="none">
+        <source src="/videos/about-bg.mp4" type="video/mp4" />
+      </video>
+    </div>
+    <div class="container about-strip-inner">
+      <div class="about-strip-text reveal-left">
+        <span class="section-tag">Our Mission</span>
+        <h2 class="display-md" id="about-strip-heading">Quality is not optional. <span class="text-accent">It's the foundation.</span></h2>
+        <p>We believe great software starts with rigorous quality assurance. At Qignite, we combine proven QA practices with cutting-edge AI tools — so your products are built right, shipped fast, and trusted at scale.</p>
+        <a href="/about" class="btn btn-outline" style="margin-top:1.75rem;">Our Story →</a>
+      </div>
+      <div class="about-strip-badges reveal">
+        {['AI-Powered Testing', 'Healthcare QA', 'Enterprise Grade', 'International Markets', '24/7 AI Support', 'CI/CD Integration'].map(b => (
+          <span class="badge">{b}</span>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section team-preview has-video-bg" aria-labelledby="team-preview-heading">
+    <div class="video-bg-wrap" aria-hidden="true">
+      <video autoplay muted loop playsinline preload="none">
+        <source src="/videos/team-preview-bg.mp4" type="video/mp4" />
+      </video>
+    </div>
+    <div class="bg-overlay" aria-hidden="true"></div>
+
+    <div class="container content-on-top">
+      <div class="section-header centered reveal">
+        <span class="section-tag">The People</span>
+        <h2 class="display-md" id="team-preview-heading">Built by <span class="text-accent">Experts</span></h2>
+        <p class="text-muted" style="margin-top:1rem; font-size:1rem; line-height:1.75;">
+          A team of QA engineers and AI specialists passionate about shipping software that works.
+        </p>
+      </div>
+      <div class="team-grid-preview">
+        {featuredTeam.map((m, i) => <TeamCard member={m} index={i} />)}
+      </div>
+      <div style="text-align:center; margin-top:3rem;" class="reveal">
+        <a href="/team" class="btn btn-outline">Meet the Full Team →</a>
+      </div>
+    </div>
+  </section>
+
+  <CTASection video="cta-bg.mp4" />
+</Layout>
+
+<style>
+/* New styles for video backgrounds */
+.has-video-bg { position: relative; overflow: hidden; }
+.content-on-top { position: relative; z-index: 2; }
+.bg-overlay { 
+  position: absolute; inset: 0; z-index: 1; 
+  background: linear-gradient(to bottom, var(--clr-bg) 0%, rgba(2,9,24,0.7) 50%, var(--clr-bg) 100%);
+}
+
+/* Grids */
+.services-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1.5rem; }
+.team-grid-preview { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+
+/* About strip */
+.about-strip { position: relative; overflow: hidden; background: var(--clr-bg-2); border-top: 1px solid var(--clr-border); border-bottom: 1px solid var(--clr-border); }
+.about-strip-video { position: absolute; inset: 0; }
+.about-strip-video video { width: 100%; height: 100%; object-fit: cover; opacity: 0.15; }
+.about-strip-video::after { content: ''; position: absolute; inset: 0; background: var(--clr-bg-2); opacity: 0.7; }
+.about-strip-inner { position: relative; z-index: 1; display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; }
+.about-strip-text { display: flex; flex-direction: column; gap: 1rem; }
+.about-strip-text p { color: var(--clr-muted); line-height: 1.75; }
+.about-strip-badges { display: flex; flex-wrap: wrap; gap: 0.75rem; align-content: flex-start; }
+.badge { padding: 0.5rem 1rem; border: 1px solid var(--clr-border); border-radius: 100px; font-size: 0.8rem; font-weight: 500; color: var(--clr-muted); background: var(--clr-bg-card); transition: all 0.2s; }
+.badge:hover { color: var(--clr-accent); border-color: var(--clr-accent); background: var(--clr-accent-dim); }
+
+@media (max-width: 900px) {
+  .team-grid-preview { grid-template-columns: 1fr 1fr; }
+  .about-strip-inner { grid-template-columns: 1fr; gap: 3rem; }
+}
+@media (max-width: 580px) {
+  .team-grid-preview { grid-template-columns: 1fr; }
+  .services-grid { grid-template-columns: 1fr; }
+}
+</style>

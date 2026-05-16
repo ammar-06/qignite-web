@@ -1,0 +1,98 @@
+---
+import '../styles/global.css';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+
+interface Props {
+  title: string;
+  description: string;
+  keywords?: string;
+  image?: string;
+  type?: 'website' | 'article' | 'profile';
+  canonical?: string;
+  structuredData?: object;
+  noindex?: boolean;
+}
+
+const {
+  title,
+  description,
+  keywords = 'AI QA, software quality assurance, automated testing, QA engineering, healthcare QA, AI testing, bug detection, test automation',
+  image = '/images/og-image.jpg',
+  type = 'website',
+  canonical,
+  structuredData,
+  noindex = false,
+} = Astro.props;
+
+const siteUrl  = 'https://qignite.com';
+const fullTitle = title.includes('Qignite') ? title : `${title} | Qignite`;
+const canonicalURL = canonical ?? `${siteUrl}${Astro.url.pathname}`;
+
+const orgSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Organization',
+  name: 'Qignite',
+  url: siteUrl,
+  logo: `${siteUrl}/images/logo/logo.png`,
+  description: 'AI-driven software quality assurance company for healthcare and enterprise platforms.',
+  sameAs: ['https://www.linkedin.com/company/qignite/'],
+  founder: { '@type': 'Person', name: 'Umair Nadeem' },
+};
+---
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+  <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+  <link rel="manifest" href="/site.webmanifest" />
+  <meta name="theme-color" content="#00C8FF" />
+
+  <title>{fullTitle}</title>
+  <meta name="description" content={description} />
+  <meta name="keywords" content={keywords} />
+  <meta name="author" content="Qignite" />
+  {noindex ? <meta name="robots" content="noindex,nofollow" /> : <meta name="robots" content="index,follow,max-snippet:-1,max-image-preview:large" />}
+  <link rel="canonical" href={canonicalURL} />
+
+  <meta property="og:type" content={type} />
+  <meta property="og:url" content={canonicalURL} />
+  <meta property="og:title" content={fullTitle} />
+  <meta property="og:description" content={description} />
+  <meta property="og:image" content={`${siteUrl}${image}`} />
+  <meta property="og:image:alt" content={fullTitle} />
+  <meta property="og:site_name" content="Qignite" />
+  <meta property="og:locale" content="en_US" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content={fullTitle} />
+  <meta name="twitter:description" content={description} />
+  <meta name="twitter:image" content={`${siteUrl}${image}`} />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+
+  <script type="application/ld+json" set:html={JSON.stringify(orgSchema)} />
+  {structuredData && <script type="application/ld+json" set:html={JSON.stringify(structuredData)} />}
+</head>
+<body>
+  <Header />
+  <main id="main">
+    <slot />
+  </main>
+  <Footer />
+
+  <script>
+    const observer = new IntersectionObserver(
+      (entries) => entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } }),
+      { threshold: 0.12, rootMargin: '0px 0px -40px 0px' }
+    );
+    document.querySelectorAll('.reveal, .reveal-left, .reveal-scale').forEach(el => observer.observe(el));
+  </script>
+</body>
+</html>

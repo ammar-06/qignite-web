@@ -1,0 +1,195 @@
+---
+interface Stat {
+  value: string;
+  label: string;
+  sub?: string;
+  numeric?: number | null;
+  suffix?: string;
+}
+
+interface Props {
+  stats?: Stat[];
+}
+
+const { stats = [
+  { value: '99%',  label: 'Bug Detection Rate',    sub: 'AI-powered precision',    numeric: 99,   suffix: '%' },
+  { value: '5+',   label: 'Projects Worked On',    sub: 'Healthcare & Enterprise', numeric: 5,    suffix: '+' },
+  { value: '10+',  label: 'International Markets',  sub: 'Global footprint',        numeric: 10,   suffix: '+' },
+  { value: '24/7', label: 'AI Support Coverage',    sub: 'Always on',               numeric: null, suffix: ''  },
+] } = Astro.props;
+---
+
+<section class="stats-section section" aria-label="Qignite by the numbers">
+  <div class="video-bg-wrap" aria-hidden="true">
+    <video autoplay muted loop playsinline preload="none">
+      <source src="/videos/stats-bg.mp4" type="video/mp4" />
+    </video>
+  </div>
+
+  <div class="stats-bg" aria-hidden="true"></div>
+
+  <div class="container" style="position: relative; z-index: 1;">
+    <div class="stats-grid">
+      {stats.map((stat: Stat, i: number) => (
+        <div
+          class="stat-item reveal"
+          style={`transition-delay: ${i * 0.1}s`}
+          data-numeric={stat.numeric ?? ''}
+          data-suffix={stat.suffix ?? ''}
+          data-value={stat.value}
+        >
+          <div class="stat-value" aria-label={stat.value}>
+            <span class="stat-num">{stat.value}</span>
+          </div>
+          <div class="stat-info">
+            <p class="stat-label">{stat.label}</p>
+            {stat.sub && <p class="stat-sub">{stat.sub}</p>}
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+.stats-section {
+  position: relative;
+  padding: 5rem 0;
+  overflow: hidden;
+}
+.stats-bg {
+  position: absolute; inset: 0;
+  background:
+    radial-gradient(ellipse 80% 100% at 50% 50%, rgba(0,200,255,0.05), transparent),
+    linear-gradient(var(--clr-border) 1px, transparent 1px),
+    linear-gradient(90deg, var(--clr-border) 1px, transparent 1px);
+  background-size: auto, 60px 60px, 60px 60px;
+  border-top: 1px solid var(--clr-border);
+  border-bottom: 1px solid var(--clr-border);
+  z-index: 0;
+}
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0;
+  position: relative;
+}
+.stat-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 3rem 2rem;
+  position: relative;
+}
+.stat-item:not(:last-child)::after {
+  content: '';
+  position: absolute;
+  right: 0; top: 20%; bottom: 20%;
+  width: 1px;
+  background: var(--clr-border);
+}
+.stat-value { margin-bottom: 0.75rem; }
+.stat-num {
+  font-family: var(--font-heading);
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  font-weight: 800;
+  background: linear-gradient(135deg, var(--clr-text), var(--clr-accent));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  line-height: 1;
+  display: inline-block;
+}
+.stat-num.counting {
+  animation: statShake 0.05s linear infinite;
+}
+.stat-label {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--clr-text);
+  margin-bottom: 0.25rem;
+}
+.stat-sub {
+  font-size: 0.8rem;
+  color: var(--clr-muted);
+}
+
+@keyframes statShake {
+  0%   { transform: translateY(0px); }
+  25%  { transform: translateY(-2px); }
+  75%  { transform: translateY(2px); }
+  100% { transform: translateY(0px); }
+}
+
+@media (max-width: 768px) {
+  .stats-grid { grid-template-columns: 1fr 1fr; }
+  .stat-item:nth-child(2)::after { display: none; }
+  .stat-item:nth-child(3)::after { display: none; }
+  .stat-item:nth-child(1)::after,
+  .stat-item:nth-child(3)::after { display: block; }
+}
+@media (max-width: 480px) {
+  .stats-grid { grid-template-columns: 1fr; }
+  .stat-item::after { display: none !important; }
+  .stat-item { border-bottom: 1px solid var(--clr-border); padding: 2rem 1.5rem; }
+  .stat-item:last-child { border-bottom: none; }
+}
+</style>
+
+<script>
+  function animateCounter(el: HTMLElement) {
+    const numEl = el.querySelector('.stat-num') as HTMLElement;
+    if (!numEl) return;
+
+    const numericRaw = el.dataset.numeric;
+    const suffix = el.dataset.suffix ?? '';
+    const original = el.dataset.value ?? numEl.textContent ?? '';
+
+    if (!numericRaw || numericRaw === '') return;
+
+    const target = parseInt(numericRaw, 10);
+    const duration = 1400;
+    const startTime = performance.now();
+
+    numEl.classList.add('counting');
+
+    function easeOut(t: number): number {
+      return 1 - Math.pow(1 - t, 4);
+    }
+
+    function tick(now: number) {
+      const elapsed = now - startTime;
+      const progress = Math.min(elapsed / duration, 1);
+      const eased = easeOut(progress);
+      const current = Math.round(eased * target);
+
+      numEl.textContent = current + suffix;
+
+      if (progress < 1) {
+        requestAnimationFrame(tick);
+      } else {
+        numEl.textContent = original;
+        numEl.classList.remove('counting');
+      }
+    }
+
+    requestAnimationFrame(tick);
+  }
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          animateCounter(entry.target as HTMLElement);
+          observer.unobserve(entry.target);
+        }
+      });
+    },
+    { threshold: 0.4 }
+  );
+
+  document.querySelectorAll('.stat-item').forEach((el) => {
+    observer.observe(el);
+  });
+</script>

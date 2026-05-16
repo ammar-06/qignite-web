@@ -1,0 +1,220 @@
+---
+import Layout from '../layouts/Layout.astro';
+import TeamCard from '../components/TeamCard.astro';
+import CTASection from '../components/CTASection.astro';
+import { team } from '../data/team';
+
+const pageSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'WebPage',
+  name: 'Qignite Team — Meet Our Experts',
+  url: 'https://qignite.com/team',
+  description: 'Meet the QA engineers and AI specialists behind Qignite.',
+  mainEntity: {
+    '@type': 'ItemList',
+    itemListElement: team.map((m, i) => ({
+      '@type': 'ListItem',
+      position: i + 1,
+      item: {
+        '@type': 'Person',
+        name: m.name,
+        jobTitle: m.title,
+        worksFor: { '@type': 'Organization', name: 'Qignite' },
+      },
+    })),
+  },
+};
+---
+
+<Layout
+  title="Meet the Qignite Team — QA & AI Specialists"
+  description="Meet the team behind Qignite — experienced QA engineers, AI specialists, and operations leaders building the future of intelligent software quality assurance."
+  keywords="Qignite team, QA engineers Pakistan, AI engineers, software quality team, Umair Nadeem, Faisal Amin, Awais Shah, Arsalan Aziz, Dawood Ahmad, Ammar Ahmad"
+  structuredData={pageSchema}
+>
+
+  <!-- PAGE HERO -->
+  <section class="page-hero section has-video" aria-labelledby="team-heading">
+    <div class="section-video-bg" aria-hidden="true">
+      <video autoplay muted loop playsinline preload="none">
+        <source src="/videos/hero-bg.mp4" type="video/mp4" />
+      </video>
+      <div class="section-video-overlay"></div>
+    </div>
+    <div class="page-hero-bg" aria-hidden="true"></div>
+    <div class="container rel">
+      <span class="section-tag reveal">The Team</span>
+      <h1 class="team-hero-heading reveal" id="team-heading">
+        People Behind <span class="text-accent">Qignite</span>
+      </h1>
+      <p class="page-sub reveal">
+        A compact, expert team of engineers, QA specialists, and AI innovators. Each one bringing deep expertise and a quality-first mindset to every project.
+      </p>
+    </div>
+  </section>
+
+  <!-- LEADERSHIP -->
+  <section class="section has-video" aria-labelledby="leadership-heading">
+    <div class="section-video-bg" aria-hidden="true">
+      <video autoplay muted loop playsinline preload="none">
+        <source src="/videos/services-bg.mp4" type="video/mp4" />
+      </video>
+      <div class="section-video-overlay"></div>
+    </div>
+    <div class="container rel">
+      <div class="section-header reveal-left">
+        <span class="section-tag">Leadership</span>
+        <h2 class="display-md" id="leadership-heading">
+          <span class="text-accent">Visionaries</span> at the Helm
+        </h2>
+      </div>
+      <div class="team-grid leadership-grid">
+        {team.slice(0, 3).map((m, i) => <TeamCard member={m} index={i} />)}
+      </div>
+    </div>
+  </section>
+
+  <!-- ENGINEERING -->
+  <section class="section engineers-section has-video" aria-labelledby="engineers-heading">
+    <div class="section-video-bg" aria-hidden="true">
+      <video autoplay muted loop playsinline preload="none">
+        <source src="/videos/about-bg.mp4" type="video/mp4" />
+      </video>
+      <div class="section-video-overlay"></div>
+    </div>
+    <div class="container rel">
+      <div class="section-header reveal-left">
+        <span class="section-tag">Engineering</span>
+        <h2 class="display-md" id="engineers-heading">
+          Builders & <span class="text-accent">Specialists</span>
+        </h2>
+      </div>
+      <div class="team-grid">
+        {team.slice(3).map((m, i) => <TeamCard member={m} index={i} />)}
+      </div>
+    </div>
+  </section>
+
+  <!-- CULTURE -->
+  <section class="culture-section section has-video" aria-labelledby="culture-heading">
+    <div class="section-video-bg" aria-hidden="true">
+      <video autoplay muted loop playsinline preload="none">
+        <source src="/videos/services-preview-bg.mp4" type="video/mp4" />
+      </video>
+      <div class="section-video-overlay"></div>
+    </div>
+    <div class="container rel">
+      <div class="culture-inner card reveal">
+        <div class="culture-text">
+          <span class="section-tag">Culture</span>
+          <h2 class="display-md" id="culture-heading">
+            A Team That Cares About <span class="text-accent">Quality</span>
+          </h2>
+          <p>At Qignite, we're not just building software tools — we're building a culture where precision, accountability, and continuous improvement are embedded into every decision we make.</p>
+        </div>
+        <div class="culture-quote">
+          <blockquote>
+            <p>"Quality is not optional. It's the foundation."</p>
+            <footer>— Umair Nadeem, CEO of Qignite</footer>
+          </blockquote>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- JOIN -->
+  <section class="section join-section has-video" aria-labelledby="join-heading">
+    <div class="section-video-bg" aria-hidden="true">
+      <video autoplay muted loop playsinline preload="none">
+        <source src="/videos/cta-bg.mp4" type="video/mp4" />
+      </video>
+      <div class="section-video-overlay"></div>
+    </div>
+    <div class="container rel">
+      <div class="section-header centered reveal">
+        <span class="section-tag">Community</span>
+        <h2 class="display-md" id="join-heading">
+          Interested in <span class="text-accent">QA & AI?</span>
+        </h2>
+        <p class="text-muted" style="margin-top:1rem; max-width:560px; font-size:1rem; line-height:1.75; margin-left:auto; margin-right:auto;">
+          Qignite provides networking opportunities for students and professionals in QA engineering, AI-integrated development, automation, and healthcare technology.
+        </p>
+        <div style="margin-top:2rem; display:flex; gap:1rem; justify-content:center; flex-wrap:wrap;">
+          <a href="https://www.linkedin.com/company/qignite/" target="_blank" rel="noopener noreferrer" class="btn btn-primary">Connect on LinkedIn</a>
+          <a href="/contact" class="btn btn-outline">Get in Touch</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <CTASection />
+</Layout>
+
+<style>
+/* Shared video bg — copied verbatim from services.astro */
+.has-video { position: relative; overflow: hidden; }
+.rel { position: relative; z-index: 2; }
+.section-video-bg { position: absolute; inset: 0; z-index: 0; }
+.section-video-bg video { width: 100%; height: 100%; object-fit: cover; opacity: 0.5; }
+.section-video-overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(
+    to bottom,
+    var(--clr-bg) 0%,
+    rgba(2, 9, 24, 0.82) 30%,
+    rgba(2, 9, 24, 0.82) 70%,
+    var(--clr-bg) 100%
+  );
+}
+
+/* Page hero — copied verbatim from services.astro */
+.page-hero { padding-top: 10rem; padding-bottom: 5rem; }
+.page-hero-bg {
+  position: absolute; inset: 0; z-index: 1; pointer-events: none;
+  background: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(0,200,255,0.07), transparent),
+    linear-gradient(var(--clr-border) 1px, transparent 1px),
+    linear-gradient(90deg, var(--clr-border) 1px, transparent 1px);
+  background-size: auto, 60px 60px, 60px 60px;
+  mask-image: linear-gradient(to bottom, black 60%, transparent);
+}
+
+/* Heading — matches services-hero-heading */
+.team-hero-heading {
+  font-family: var(--font-heading);
+  font-size: clamp(2.4rem, 5.5vw, 4.5rem);
+  font-weight: 600;
+  line-height: 1.18;
+  letter-spacing: -0.02em;
+  color: var(--clr-text);
+  max-width: 720px;
+  margin-top: 1rem;
+  margin-bottom: 0;
+}
+
+.page-sub { font-size: clamp(1rem, 2vw, 1.15rem); color: var(--clr-muted); max-width: 600px; line-height: 1.8; margin-top: 1.5rem; }
+
+/* Team grids */
+.team-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+.leadership-grid { grid-template-columns: repeat(3, 1fr); }
+
+/* Engineers section */
+.engineers-section { border-top: 1px solid var(--clr-border); border-bottom: 1px solid var(--clr-border); }
+
+/* Culture */
+.culture-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; padding: 3rem; align-items: center; overflow: hidden; }
+.culture-text { display: flex; flex-direction: column; gap: 1rem; min-width: 0; }
+.culture-text p { color: var(--clr-muted); line-height: 1.8; }
+.culture-quote { display: flex; align-items: center; min-width: 0; }
+blockquote { border-left: 3px solid var(--clr-accent); padding: 1.5rem 2rem; background: var(--clr-accent-dim); border-radius: 0 var(--radius-md) var(--radius-md) 0; width: 100%; }
+blockquote p { font-family: var(--font-heading); font-size: 1.4rem; font-weight: 700; color: var(--clr-text); line-height: 1.4; margin-bottom: 1rem; }
+blockquote footer { font-size: 0.85rem; color: var(--clr-accent); }
+
+@media (max-width: 900px) {
+  .team-grid, .leadership-grid { grid-template-columns: 1fr 1fr; }
+  .culture-inner { grid-template-columns: 1fr; gap: 2rem; }
+  .team-hero-heading { font-size: clamp(2rem, 7vw, 3rem); }
+}
+@media (max-width: 580px) {
+  .team-grid, .leadership-grid { grid-template-columns: 1fr; }
+}
+</style>
