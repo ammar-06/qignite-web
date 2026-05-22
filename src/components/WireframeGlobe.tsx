@@ -115,6 +115,30 @@ export default function WireframeGlobe({
     const dots = new THREE.Points(dotGeo, dotMat);
     scene.add(dots);
 
+    // --- Background Stars ---
+    const starCount = 200;
+    const starGeo = new THREE.BufferGeometry();
+    const starPos = new Float32Array(starCount * 3);
+    const starSpeeds = new Float32Array(starCount);
+    for (let i = 0; i < starCount; i++) {
+      starPos[i * 3] = (Math.random() - 0.5) * 150;
+      starPos[i * 3 + 1] = (Math.random() - 0.5) * 100;
+      starPos[i * 3 + 2] = (Math.random() - 0.5) * 80;
+      starSpeeds[i] = Math.random() * 0.5 + 0.2;
+    }
+    starGeo.setAttribute('position', new THREE.BufferAttribute(starPos, 3));
+    const starMat = new THREE.PointsMaterial({
+      color: new THREE.Color('#ffffff'),
+      size: 0.5,
+      transparent: true,
+      opacity: 0.5,
+      blending: THREE.AdditiveBlending,
+      sizeAttenuation: true,
+      depthWrite: false,
+    });
+    const stars = new THREE.Points(starGeo, starMat);
+    scene.add(stars);
+
     // --- Animation ---
     let animId: number;
     const clock = new THREE.Clock();
@@ -146,6 +170,15 @@ export default function WireframeGlobe({
       }
       dotGeo.attributes.position.needsUpdate = true;
 
+      // Update background stars
+      const sPos = starGeo.attributes.position.array as Float32Array;
+      for (let i = 0; i < starCount; i++) {
+        sPos[i * 3 + 1] += Math.sin(t * starSpeeds[i] + i) * 0.005;
+      }
+      starGeo.attributes.position.needsUpdate = true;
+      stars.rotation.y = t * 0.015;
+      stars.rotation.x = t * 0.01;
+
       renderer.render(scene, camera);
     }
     animate();
@@ -174,6 +207,8 @@ export default function WireframeGlobe({
       ring2Mat.dispose();
       dotGeo.dispose();
       dotMat.dispose();
+      starGeo.dispose();
+      starMat.dispose();
       if (container.contains(renderer.domElement)) {
         container.removeChild(renderer.domElement);
       }

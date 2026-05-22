@@ -94,21 +94,6 @@ export default function ParticleField({
     const points2 = new THREE.Points(geo2, mat2);
     scene.add(points2);
 
-    // --- Faint connecting lines between nearby particles ---
-    const lineGeo = new THREE.BufferGeometry();
-    const maxLines = 40;
-    const linePositions = new Float32Array(maxLines * 6);
-    lineGeo.setAttribute('position', new THREE.BufferAttribute(linePositions, 3));
-    const lineMat = new THREE.LineBasicMaterial({
-      color: new THREE.Color(color),
-      transparent: true,
-      opacity: 0.06,
-      blending: THREE.AdditiveBlending,
-      depthWrite: false,
-    });
-    const lines = new THREE.LineSegments(lineGeo, lineMat);
-    scene.add(lines);
-
     // --- Animation ---
     let animId: number;
     const clock = new THREE.Clock();
@@ -130,33 +115,6 @@ export default function ParticleField({
         if (pos[i * 3 + 1] < -60) pos[i * 3 + 1] = 60;
       }
       geo1.attributes.position.needsUpdate = true;
-
-      // Update connection lines
-      let lineIdx = 0;
-      const lp = lineGeo.attributes.position.array as Float32Array;
-      for (let i = 0; i < count && lineIdx < maxLines; i++) {
-        for (let j = i + 1; j < count && lineIdx < maxLines; j++) {
-          const dx = pos[i * 3] - pos[j * 3];
-          const dy = pos[i * 3 + 1] - pos[j * 3 + 1];
-          const dz = pos[i * 3 + 2] - pos[j * 3 + 2];
-          const dist = dx * dx + dy * dy + dz * dz;
-          if (dist < 400) {
-            lp[lineIdx * 6] = pos[i * 3];
-            lp[lineIdx * 6 + 1] = pos[i * 3 + 1];
-            lp[lineIdx * 6 + 2] = pos[i * 3 + 2];
-            lp[lineIdx * 6 + 3] = pos[j * 3];
-            lp[lineIdx * 6 + 4] = pos[j * 3 + 1];
-            lp[lineIdx * 6 + 5] = pos[j * 3 + 2];
-            lineIdx++;
-          }
-        }
-      }
-      // Zero out unused line slots
-      for (let i = lineIdx; i < maxLines; i++) {
-        lp[i * 6] = 0; lp[i * 6 + 1] = 0; lp[i * 6 + 2] = 0;
-        lp[i * 6 + 3] = 0; lp[i * 6 + 4] = 0; lp[i * 6 + 5] = 0;
-      }
-      lineGeo.attributes.position.needsUpdate = true;
 
       // Gentle rotation
       points1.rotation.y = t * 0.015 * speed;
@@ -186,8 +144,6 @@ export default function ParticleField({
       mat1.dispose();
       geo2.dispose();
       mat2.dispose();
-      lineGeo.dispose();
-      lineMat.dispose();
       if (container.contains(renderer.domElement)) {
         container.removeChild(renderer.domElement);
       }
