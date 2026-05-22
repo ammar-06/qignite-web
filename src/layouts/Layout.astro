@@ -4,7 +4,7 @@ import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import SkeletonLoader from '../components/SkeletonLoader.astro';
 import ScrollParallax from '../components/ScrollParallax.astro';
-import { ViewTransitions } from 'astro:transitions';
+import { ClientRouter } from 'astro:transitions';
 
 interface Props {
   title: string;
@@ -61,7 +61,7 @@ const orgSchema = {
   <meta name="author" content="Qignite" />
   {noindex ? <meta name="robots" content="noindex,nofollow" /> : <meta name="robots" content="index,follow,max-snippet:-1,max-image-preview:large" />}
   <link rel="canonical" href={canonicalURL} />
-  <ViewTransitions />
+  <ClientRouter />
 
   <meta property="og:type" content={type} />
   <meta property="og:url" content={canonicalURL} />
@@ -81,8 +81,8 @@ const orgSchema = {
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
 
-  <script type="application/ld+json" set:html={JSON.stringify(orgSchema)} />
-  {structuredData && <script type="application/ld+json" set:html={JSON.stringify(structuredData)} />}
+  <script is:inline type="application/ld+json" set:html={JSON.stringify(orgSchema)} />
+  {structuredData && <script is:inline type="application/ld+json" set:html={JSON.stringify(structuredData)} />}
 </head>
 <body>
   <!-- Skeleton Loader — shows instantly, fades out on load -->
