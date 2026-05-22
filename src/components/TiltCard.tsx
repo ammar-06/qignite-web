@@ -1,5 +1,5 @@
 'use client';
-import { useRef, useState, useCallback, type ReactNode } from 'react';
+import { useRef, useCallback, type ReactNode } from 'react';
 
 interface TiltCardProps {
   children: ReactNode;
@@ -7,7 +7,6 @@ interface TiltCardProps {
   maxTilt?: number;
   glareOpacity?: number;
   scale?: number;
-  style?: React.CSSProperties;
 }
 
 export default function TiltCard({
@@ -16,11 +15,9 @@ export default function TiltCard({
   maxTilt = 12,
   glareOpacity = 0.15,
   scale = 1.02,
-  style,
 }: TiltCardProps) {
   const cardRef = useRef<HTMLDivElement>(null);
-  const [transform, setTransform] = useState('perspective(800px) rotateX(0deg) rotateY(0deg) scale3d(1,1,1)');
-  const [glareStyle, setGlareStyle] = useState<React.CSSProperties>({ opacity: 0 });
+  const glareRef = useRef<HTMLDivElement>(null);
   const rafRef = useRef<number | null>(null);
 
   const handleMouseMove = useCallback(
@@ -40,17 +37,15 @@ export default function TiltCard({
         const rotateY = ((x - centerX) / centerX) * maxTilt;
         const rotateX = -((y - centerY) / centerY) * maxTilt;
 
-        setTransform(
-          `perspective(800px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(${scale},${scale},${scale})`
-        );
+        card.style.transform = `perspective(800px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(${scale},${scale},${scale})`;
 
         // Glare
-        const glareX = (x / rect.width) * 100;
-        const glareY = (y / rect.height) * 100;
-        setGlareStyle({
-          opacity: glareOpacity,
-          background: `radial-gradient(circle at ${glareX}% ${glareY}%, rgba(0,200,255,0.35), transparent 60%)`,
-        });
+        if (glareRef.current) {
+          const glareX = (x / rect.width) * 100;
+          const glareY = (y / rect.height) * 100;
+          glareRef.current.style.opacity = glareOpacity.toString();
+          glareRef.current.style.background = `radial-gradient(circle at ${glareX}% ${glareY}%, rgba(0,200,255,0.35), transparent 60%)`;
+        }
       });
     },
     [maxTilt, glareOpacity, scale]
@@ -58,8 +53,13 @@ export default function TiltCard({
 
   const handleMouseLeave = useCallback(() => {
     if (rafRef.current) cancelAnimationFrame(rafRef.current);
-    setTransform('perspective(800px) rotateX(0deg) rotateY(0deg) scale3d(1,1,1)');
-    setGlareStyle({ opacity: 0 });
+    if (cardRef.current) {
+      cardRef.current.style.transform = 'perspective(800px) rotateX(0deg) rotateY(0deg) scale3d(1,1,1)';
+    }
+    if (glareRef.current) {
+      glareRef.current.style.opacity = '0';
+      glareRef.current.style.background = '';
+    }
   }, []);
 
   return (
@@ -68,18 +68,9 @@ export default function TiltCard({
       className={`tilt-card-wrapper tilt-card-base ${className}`}
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
-      style={{
-        transform,
-        ...style,
-      }}
     >
       {children}
-      <div
-        className="tilt-glare"
-        style={{
-          ...glareStyle,
-        }}
-      />
+      <div ref={glareRef} className="tilt-glare" />
     </div>
   );
 }

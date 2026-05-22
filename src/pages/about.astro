@@ -2,6 +2,9 @@
 import Layout from '../layouts/Layout.astro';
 import CTASection from '../components/CTASection.astro';
 import ThreeScene from '../components/ThreeScene.tsx';
+import ParticleField from '../components/ParticleField.tsx';
+import WireframeGlobe from '../components/WireframeGlobe.tsx';
+import GridPlane from '../components/GridPlane.tsx';
 
 const values = [
   { icon: '⚡', title: 'Precision First', desc: 'Every bug caught, every edge case explored. We don\'t ship guesses.' },
@@ -37,13 +40,7 @@ const pageSchema = {
 >
 
   <!-- ═══ PAGE HERO ═══ -->
-  <section class="page-hero section has-video" aria-labelledby="about-heading">
-    <div class="section-video-bg" aria-hidden="true">
-      <video autoplay muted loop playsinline preload="none">
-        <source src="/videos/about-bg.mp4" type="video/mp4" />
-      </video>
-      <div class="section-video-overlay"></div>
-    </div>
+  <section class="page-hero section has-3d" aria-labelledby="about-heading">
     <!-- Three.js particles in hero -->
     <ThreeScene client:visible />
     <div class="page-hero-bg" aria-hidden="true"></div>
@@ -59,13 +56,9 @@ const pageSchema = {
   </section>
 
   <!-- ═══ MISSION / VISION ═══ -->
-  <section class="section mv-section has-video parallax-section" aria-labelledby="mission-heading" data-parallax="0.04">
-    <div class="section-video-bg" aria-hidden="true">
-      <video autoplay muted loop playsinline preload="none">
-        <source src="/videos/hero-bg.mp4" type="video/mp4" />
-      </video>
-      <div class="section-video-overlay"></div>
-    </div>
+  <section class="section mv-section has-3d parallax-section" aria-labelledby="mission-heading" data-parallax="0.04">
+    <ParticleField client:visible count={120} opacity={0.35} />
+    <div class="section-3d-overlay" aria-hidden="true"></div>
     <div class="container rel">
       <div class="mv-grid">
         <div class="mv-card card reveal-3d-left" style="transition-delay:0s" data-tilt-about>
@@ -83,13 +76,9 @@ const pageSchema = {
   </section>
 
   <!-- ═══ WHAT WE SPECIALIZE IN ═══ -->
-  <section class="section what-section has-video parallax-section" aria-labelledby="what-heading" data-parallax="0.03">
-    <div class="section-video-bg" aria-hidden="true">
-      <video autoplay muted loop playsinline preload="none">
-        <source src="/videos/about-bg.mp4" type="video/mp4" />
-      </video>
-      <div class="section-video-overlay"></div>
-    </div>
+  <section class="section what-section has-3d parallax-section" aria-labelledby="what-heading" data-parallax="0.03">
+    <GridPlane client:visible opacity={0.08} />
+    <div class="section-3d-overlay" aria-hidden="true"></div>
     <div class="container rel">
       <div class="section-header reveal-3d-left" style="transition-delay:0s">
         <span class="section-tag">Expertise</span>
@@ -117,13 +106,9 @@ const pageSchema = {
   </section>
 
   <!-- ═══ VALUES ═══ -->
-  <section class="section values-section has-video parallax-section" aria-labelledby="values-heading" data-parallax="0.05">
-    <div class="section-video-bg" aria-hidden="true">
-      <video autoplay muted loop playsinline preload="none">
-        <source src="/videos/services-bg.mp4" type="video/mp4" />
-      </video>
-      <div class="section-video-overlay"></div>
-    </div>
+  <section class="section values-section has-3d parallax-section" aria-labelledby="values-heading" data-parallax="0.05">
+    <ParticleField client:visible color="#3B6FFF" color2="#00C8FF" count={140} opacity={0.3} />
+    <div class="section-3d-overlay" aria-hidden="true"></div>
     <div class="container rel">
       <div class="section-header centered reveal-3d" style="transition-delay:0s">
         <span class="section-tag">Culture</span>
@@ -142,13 +127,9 @@ const pageSchema = {
   </section>
 
   <!-- ═══ TIMELINE ═══ -->
-  <section class="section timeline-section has-video parallax-section" aria-labelledby="journey-heading" data-parallax="0.03">
-    <div class="section-video-bg" aria-hidden="true">
-      <video autoplay muted loop playsinline preload="none">
-        <source src="/videos/cta-bg.mp4" type="video/mp4" />
-      </video>
-      <div class="section-video-overlay"></div>
-    </div>
+  <section class="section timeline-section has-3d parallax-section" aria-labelledby="journey-heading" data-parallax="0.03">
+    <WireframeGlobe client:visible size={14} opacity={0.06} />
+    <div class="section-3d-overlay" aria-hidden="true"></div>
     <div class="container rel">
       <div class="section-header reveal-3d-left" style="transition-delay:0s">
         <span class="section-tag">Journey</span>
@@ -173,20 +154,12 @@ const pageSchema = {
 </Layout>
 
 <style>
-/* ── Shared video background pattern ── */
-.has-video { position: relative; overflow: hidden; }
+/* ── 3D background pattern ── */
+.has-3d { position: relative; overflow: hidden; }
 .rel { position: relative; z-index: 2; }
 
-.section-video-bg {
-  position: absolute; inset: 0; z-index: 0;
-}
-.section-video-bg video {
-  width: 100%; height: 100%;
-  object-fit: cover;
-  opacity: 0.55;          /* subtle — just enough to feel alive */
-}
-.section-video-overlay {
-  position: absolute; inset: 0;
+.section-3d-overlay {
+  position: absolute; inset: 0; z-index: 1;
   background: linear-gradient(
     to bottom,
     var(--clr-bg) 0%,

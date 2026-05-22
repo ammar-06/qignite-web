@@ -302,22 +302,3 @@ h1, h2, h3, h4, h5, h6 { font-family: var(--font-heading); line-height: 1.1; }
 .tilt-card-wrap { perspective: 1200px; display: block; }
 .tilt-card-inner { transform-style: preserve-3d; transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94); }
 .tilt-card-inner.hovering { transition: none; }
-
-/* ─── VIDEO BG ─── */
-.video-bg-wrap {
-  position: absolute;
-  inset: 0;
-  overflow: hidden;
-  z-index: 0;
-}
-.video-bg-wrap video {
-  width: 100%; height: 100%;
-  object-fit: cover;
-  opacity: 0.25;
-}
-.video-bg-wrap::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(to bottom, var(--clr-bg) 0%, transparent 30%, transparent 70%, var(--clr-bg) 100%);
-}

@@ -1,4 +1,5 @@
 ---
+import ParticleField from './ParticleField.tsx';
 const currentYear = new Date().getFullYear();
 
 const navLinks = [
@@ -17,13 +18,9 @@ const services = [
 ---
 
 <footer class="footer">
-  <!-- Video background -->
-  <div class="footer-video-bg" aria-hidden="true">
-    <video autoplay muted loop playsinline preload="none">
-      <source src="/videos/hero-bg.mp4" type="video/mp4" />
-    </video>
-    <div class="footer-video-overlay"></div>
-  </div>
+  <!-- 3D particle background -->
+  <ParticleField client:visible count={80} opacity={0.25} speed={0.5} />
+  <div class="footer-3d-overlay" aria-hidden="true"></div>
 
   <div class="footer-glow"></div>
   <div class="container footer-inner">
@@ -98,19 +95,9 @@ const services = [
   overflow: hidden;
 }
 
-/* Video background */
-.footer-video-bg {
-  position: absolute;
-  inset: 0;
-  z-index: 0;
-}
-.footer-video-bg video {
-  width: 100%; height: 100%;
-  object-fit: cover;
-  opacity: 0.55;
-}
-.footer-video-overlay {
-  position: absolute; inset: 0;
+/* 3D overlay */
+.footer-3d-overlay {
+  position: absolute; inset: 0; z-index: 1;
   background: linear-gradient(
     to bottom,
     var(--clr-bg) 0%,
@@ -120,7 +107,7 @@ const services = [
   );
 }
 
-/* Keep all content above the video */
+/* Keep all content above the 3D scene */
 .footer-inner { position: relative; z-index: 2; }
 
 .footer-glow {

@@ -5,6 +5,8 @@ import Stats from '../components/Stats.astro';
 import ServiceCard from '../components/ServiceCard.astro';
 import TeamCard from '../components/TeamCard.astro';
 import CTASection from '../components/CTASection.astro';
+import ParticleField from '../components/ParticleField.tsx';
+import WireframeGlobe from '../components/WireframeGlobe.tsx';
 import { services } from '../data/services';
 import { team } from '../data/team';
 
@@ -29,17 +31,12 @@ const pageSchema = {
     sub="We engineer intelligent QA systems that detect more bugs, ship faster releases, and deliver software your users can trust across healthcare and enterprise platforms worldwide."
     ctaPrimary={{ label: 'Explore Services', href: '/services' }}
     ctaSecondary={{ label: 'Meet the Team', href: '/team' }}
-    video="hero-bg.mp4"
   />
 
   <Stats />
 
-  <section class="section services-preview has-video-bg parallax-section" aria-labelledby="services-heading" data-parallax="0.05">
-    <div class="video-bg-wrap" aria-hidden="true">
-      <video autoplay muted loop playsinline preload="none">
-        <source src="/videos/services-preview-bg.mp4" type="video/mp4" />
-      </video>
-    </div>
+  <section class="section services-preview has-3d-bg parallax-section" aria-labelledby="services-heading" data-parallax="0.05">
+    <ParticleField client:visible />
     <div class="bg-overlay" aria-hidden="true"></div>
 
     <div class="container content-on-top">
@@ -62,11 +59,7 @@ const pageSchema = {
   </section>
 
   <section class="about-strip section parallax-section" aria-labelledby="about-strip-heading" data-parallax="0.03">
-    <div class="about-strip-video" aria-hidden="true">
-      <video autoplay muted loop playsinline preload="none">
-        <source src="/videos/about-bg.mp4" type="video/mp4" />
-      </video>
-    </div>
+    <WireframeGlobe client:visible size={10} opacity={0.07} />
     <div class="container about-strip-inner">
       <div class="about-strip-text reveal-3d-left" style="transition-delay: 0s">
         <span class="section-tag">Our Mission</span>
@@ -82,12 +75,8 @@ const pageSchema = {
     </div>
   </section>
 
-  <section class="section team-preview has-video-bg parallax-section" aria-labelledby="team-preview-heading" data-parallax="0.04">
-    <div class="video-bg-wrap" aria-hidden="true">
-      <video autoplay muted loop playsinline preload="none">
-        <source src="/videos/team-preview-bg.mp4" type="video/mp4" />
-      </video>
-    </div>
+  <section class="section team-preview has-3d-bg parallax-section" aria-labelledby="team-preview-heading" data-parallax="0.04">
+    <ParticleField client:visible color="#3B6FFF" color2="#00C8FF" opacity={0.4} />
     <div class="bg-overlay" aria-hidden="true"></div>
 
     <div class="container content-on-top">
@@ -107,12 +96,12 @@ const pageSchema = {
     </div>
   </section>
 
-  <CTASection video="cta-bg.mp4" />
+  <CTASection />
 </Layout>
 
 <style>
-/* New styles for video backgrounds */
-.has-video-bg { position: relative; overflow: hidden; }
+/* 3D background sections */
+.has-3d-bg { position: relative; overflow: hidden; }
 .content-on-top { position: relative; z-index: 2; }
 .bg-overlay { 
   position: absolute; inset: 0; z-index: 1; 
@@ -125,9 +114,6 @@ const pageSchema = {
 
 /* About strip */
 .about-strip { position: relative; overflow: hidden; background: var(--clr-bg-2); border-top: 1px solid var(--clr-border); border-bottom: 1px solid var(--clr-border); }
-.about-strip-video { position: absolute; inset: 0; }
-.about-strip-video video { width: 100%; height: 100%; object-fit: cover; opacity: 0.15; }
-.about-strip-video::after { content: ''; position: absolute; inset: 0; background: var(--clr-bg-2); opacity: 0.7; }
 .about-strip-inner { position: relative; z-index: 1; display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; }
 .about-strip-text { display: flex; flex-direction: column; gap: 1rem; }
 .about-strip-text p { color: var(--clr-muted); line-height: 1.75; }

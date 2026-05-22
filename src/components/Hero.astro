@@ -6,23 +6,16 @@ interface Props {
   sub?: string;
   ctaPrimary?: { label: string; href: string };
   ctaSecondary?: { label: string; href: string };
-  video?: string;
 }
 
 const {
   sub,
   ctaPrimary  = { label: 'Explore Services', href: '/services' },
   ctaSecondary = { label: 'Meet the Team', href: '/team' },
-  video = 'hero-bg.mp4',
 } = Astro.props;
 ---
 
 <section class="hero">
-  <div class="video-bg-wrap" aria-hidden="true">
-    <video autoplay muted loop playsinline preload="none" aria-hidden="true">
-      <source src={`/videos/${video}`} type="video/mp4" />
-    </video>
-  </div>
 
   <!-- Three.js Particle Scene -->
   <ThreeScene client:visible />
