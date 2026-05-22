@@ -165,10 +165,7 @@ h1, h2, h3, h4, h5, h6 { font-family: var(--font-heading); line-height: 1.1; }
 
 /* ─── GRID BACKGROUNDS ─── */
 .grid-bg {
-  background-image:
-    linear-gradient(var(--clr-border) 1px, transparent 1px),
-    linear-gradient(90deg, var(--clr-border) 1px, transparent 1px);
-  background-size: 60px 60px;
+  /* Removed grid background */
 }
 .grid-bg::before {
   content: '';
