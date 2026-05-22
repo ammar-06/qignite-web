@@ -2,6 +2,7 @@
 import Layout from '../layouts/Layout.astro';
 import ServiceCard from '../components/ServiceCard.astro';
 import CTASection from '../components/CTASection.astro';
+import ThreeScene from '../components/ThreeScene.tsx';
 import { services } from '../data/services';
 
 const process = [
@@ -76,20 +77,21 @@ const pageSchema = {
       </video>
       <div class="section-video-overlay"></div>
     </div>
+    <ThreeScene client:visible />
     <div class="page-hero-bg" aria-hidden="true"></div>
     <div class="container rel">
-      <span class="section-tag reveal">Services</span>
-      <h1 class="services-hero-heading reveal" id="services-heading">
+      <span class="section-tag reveal-3d-scale" style="transition-delay:0s">Services</span>
+      <h1 class="services-hero-heading reveal-3d" id="services-heading" style="transition-delay:0.1s">
         Intelligent QA <span class="text-accent">for Every Layer</span>
       </h1>
-      <p class="page-sub reveal">
+      <p class="page-sub reveal-3d" style="transition-delay:0.2s">
         From AI-powered automation to specialized healthcare testing, Qignite provides end-to-end quality engineering solutions that scale with your product.
       </p>
     </div>
   </section>
 
   <!-- WHAT WE OFFER -->
-  <section class="section has-video" aria-labelledby="our-services-heading">
+  <section class="section has-video parallax-section" aria-labelledby="our-services-heading" data-parallax="0.04">
     <div class="section-video-bg" aria-hidden="true">
       <video autoplay muted loop playsinline preload="none">
         <source src="/videos/services-bg.mp4" type="video/mp4" />
@@ -97,7 +99,7 @@ const pageSchema = {
       <div class="section-video-overlay"></div>
     </div>
     <div class="container rel">
-      <div class="section-header centered reveal">
+      <div class="section-header centered reveal-3d" style="transition-delay:0s">
         <span class="section-tag">What We Offer</span>
         <h2 class="display-md" id="our-services-heading">
           Built for <span class="text-accent">Real-World Production</span>
@@ -113,7 +115,7 @@ const pageSchema = {
   </section>
 
   <!-- PROCESS -->
-  <section class="section process-section has-video" aria-labelledby="process-heading">
+  <section class="section process-section has-video parallax-section" aria-labelledby="process-heading" data-parallax="0.03">
     <div class="section-video-bg" aria-hidden="true">
       <video autoplay muted loop playsinline preload="none">
         <source src="/videos/about-bg.mp4" type="video/mp4" />
@@ -121,7 +123,7 @@ const pageSchema = {
       <div class="section-video-overlay"></div>
     </div>
     <div class="container rel">
-      <div class="section-header reveal-left">
+      <div class="section-header reveal-3d-left" style="transition-delay:0s">
         <span class="section-tag">Process</span>
         <h2 class="display-md" id="process-heading">
           How We <span class="text-accent">Work</span>
@@ -132,7 +134,7 @@ const pageSchema = {
       </div>
       <div class="process-steps">
         {process.map((p, i) => (
-          <div class="process-step reveal" style={`transition-delay:${i*0.1}s`}>
+          <div class="process-step reveal-3d-left" style={`transition-delay:${i*0.12}s`}>
             <div class="process-step-num" aria-hidden="true">{p.step}</div>
             <div class="process-step-content">
               <h3>{p.title}</h3>
@@ -145,7 +147,7 @@ const pageSchema = {
   </section>
 
   <!-- TOOLS WE MASTER -->
-  <section class="section tech-section has-video" aria-labelledby="tech-heading">
+  <section class="section tech-section has-video parallax-section" aria-labelledby="tech-heading" data-parallax="0.05">
     <div class="section-video-bg" aria-hidden="true">
       <video autoplay muted loop playsinline preload="none">
         <source src="/videos/cta-bg.mp4" type="video/mp4" />
@@ -153,7 +155,7 @@ const pageSchema = {
       <div class="section-video-overlay"></div>
     </div>
     <div class="container rel">
-      <div class="section-header centered reveal">
+      <div class="section-header centered reveal-3d" style="transition-delay:0s">
         <span class="section-tag">Technology</span>
         <h2 class="display-md" id="tech-heading">
           Tools We <span class="text-accent">Master</span>
@@ -161,11 +163,11 @@ const pageSchema = {
       </div>
       <div class="tool-categories">
         {toolCategories.map((cat, ci) => (
-          <div class="tool-category reveal" style={`transition-delay:${ci * 0.07}s`}>
+          <div class="tool-category reveal-3d" style={`transition-delay:${ci * 0.08}s`}>
             <h3 class="tool-category-title">{cat.category}</h3>
             <div class="tool-badges">
               {cat.tools.map(tool => (
-                <span class="tech-badge card">{tool}</span>
+                <span class="tech-badge card float-badge">{tool}</span>
               ))}
             </div>
           </div>
@@ -175,7 +177,7 @@ const pageSchema = {
   </section>
 
   <!-- INDUSTRIES -->
-  <section class="section industries-section has-video" aria-labelledby="industries-heading">
+  <section class="section industries-section has-video parallax-section" aria-labelledby="industries-heading" data-parallax="0.03">
     <div class="section-video-bg" aria-hidden="true">
       <video autoplay muted loop playsinline preload="none">
         <source src="/videos/services-bg.mp4" type="video/mp4" />
@@ -184,7 +186,7 @@ const pageSchema = {
     </div>
     <div class="container rel">
       <div class="industries-inner">
-        <div class="reveal-left">
+        <div class="reveal-3d-left" style="transition-delay:0s">
           <span class="section-tag">Industries</span>
           <h2 class="display-md" id="industries-heading">Who We Serve</h2>
           <p class="text-muted" style="margin-top:1rem; line-height:1.8; max-width:480px;">
@@ -198,7 +200,7 @@ const pageSchema = {
             { icon: '🏢', title: 'Enterprise Software', desc: 'SaaS platforms, internal tools, APIs' },
             { icon: '🌐', title: 'International Markets', desc: 'Multi-region, compliance-aware deployments' },
           ].map((ind, i) => (
-            <div class="industry-item card reveal" style={`transition-delay:${i*0.08}s`}>
+            <div class="industry-item card reveal-3d" style={`transition-delay:${i*0.1}s`}>
               <span class="industry-icon" aria-hidden="true">{ind.icon}</span>
               <div>
                 <h3>{ind.title}</h3>
@@ -264,7 +266,12 @@ const pageSchema = {
 /* Process */
 .process-section { background: var(--clr-bg-2); border-top: 1px solid var(--clr-border); border-bottom: 1px solid var(--clr-border); }
 .process-steps { display: flex; flex-direction: column; gap: 0; max-width: 750px; }
-.process-step { display: grid; grid-template-columns: 80px 1fr; gap: 2rem; align-items: start; padding: 2rem 0; border-bottom: 1px solid var(--clr-border); }
+.process-step {
+  display: grid; grid-template-columns: 80px 1fr; gap: 2rem; align-items: start;
+  padding: 2rem 0; border-bottom: 1px solid var(--clr-border);
+  transition: transform 0.3s var(--ease);
+}
+.process-step:hover { transform: translateX(8px); }
 .process-step:last-child { border-bottom: none; }
 .process-step-num { font-family: var(--font-heading); font-size: 3rem; font-weight: 800; color: var(--clr-accent); opacity: 0.3; line-height: 1; }
 .process-step-content h3 { font-size: 1.15rem; font-weight: 700; margin-bottom: 0.5rem; }
@@ -284,14 +291,25 @@ const pageSchema = {
   border-bottom: 1px solid var(--clr-border);
 }
 .tool-badges { display: flex; flex-wrap: wrap; gap: 0.6rem; }
-.tech-badge { padding: 0.45rem 1rem; font-size: 0.82rem; font-weight: 500; color: var(--clr-muted); border-radius: 100px; cursor: default; transition: color 0.2s, border-color 0.2s; }
-.tech-badge:hover { color: var(--clr-accent); border-color: var(--clr-accent); }
+.tech-badge {
+  padding: 0.45rem 1rem; font-size: 0.82rem; font-weight: 500;
+  color: var(--clr-muted); border-radius: 100px; cursor: default;
+  transition: color 0.2s, border-color 0.2s, transform 0.3s;
+}
+.tech-badge:hover {
+  color: var(--clr-accent); border-color: var(--clr-accent);
+  transform: translateY(-2px) !important;
+}
 
 /* Industries */
 .industries-section { background: var(--clr-bg-2); border-top: 1px solid var(--clr-border); border-bottom: 1px solid var(--clr-border); }
 .industries-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: start; }
 .industry-cards { display: flex; flex-direction: column; gap: 1rem; }
-.industry-item { display: flex; align-items: center; gap: 1.25rem; padding: 1.25rem 1.5rem; }
+.industry-item {
+  display: flex; align-items: center; gap: 1.25rem; padding: 1.25rem 1.5rem;
+  transition: transform 0.3s var(--ease);
+}
+.industry-item:hover { transform: translateX(8px); }
 .industry-icon { font-size: 1.75rem; flex-shrink: 0; }
 .industry-item h3 { font-size: 1rem; font-weight: 700; margin-bottom: 0.25rem; }
 .industry-item p { font-size: 0.85rem; color: var(--clr-muted); }

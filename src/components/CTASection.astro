@@ -1,4 +1,6 @@
 ---
+import FloatingRing from './FloatingRing.tsx';
+
 interface Props {
   headline?: string;
   sub?: string;
@@ -21,24 +23,21 @@ const {
 ---
 
 <section class="cta-section section" aria-label="Call to action">
-  {video && (
-    <div class="video-bg-wrap" aria-hidden="true">
-      <video autoplay muted loop playsinline preload="none">
-        <source src={`/videos/${video}`} type="video/mp4" />
-      </video>
-    </div>
-  )}
+
+
+  <!-- Floating 3D Ring -->
+  <FloatingRing client:visible />
 
   <div class="cta-bg" aria-hidden="true"></div>
 
   <div class="container cta-inner">
-    <div class="cta-badge reveal">
+    <div class="cta-badge reveal-3d-scale" style="transition-delay: 0s">
       <span class="cta-badge-dot" aria-hidden="true"></span>
       Let's Build Together
     </div>
-    <h2 class="display-lg cta-headline reveal">{headline}</h2>
-    <p class="cta-sub reveal">{sub}</p>
-    <div class="cta-actions reveal">
+    <h2 class="display-lg cta-headline reveal-3d" style="transition-delay: 0.1s">{headline}</h2>
+    <p class="cta-sub reveal-3d" style="transition-delay: 0.2s">{sub}</p>
+    <div class="cta-actions reveal-3d-up" style="transition-delay: 0.3s">
       <a href={ctaHref} class="btn btn-primary btn-lg">
         {ctaLabel}
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">

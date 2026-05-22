@@ -16,10 +16,11 @@ const photoPosition = photoPositions[member.id] ?? 'top center';
 ---
 
 <article
-  class:list={['team-card card reveal', { 'team-card--featured': layout === 'featured' }]}
-  style={`transition-delay: ${index * 0.08}s`}
+  class:list={['team-card card reveal-3d', { 'team-card--featured': layout === 'featured' }]}
+  style={`transition-delay: ${index * 0.1}s`}
   itemscope
   itemtype="https://schema.org/Person"
+  data-tilt-team
 >
   <div class="card-photo-wrap">
     <img
@@ -66,11 +67,25 @@ const photoPosition = photoPositions[member.id] ?? 'top center';
 </article>
 
 <style>
-.team-card { display: flex; flex-direction: column; overflow: hidden; }
-.card-photo-wrap { position: relative; aspect-ratio: 1; overflow: hidden; border-radius: var(--radius-md) var(--radius-md) 0 0; }
+.team-card {
+  display: flex; flex-direction: column; overflow: hidden;
+  transform-style: preserve-3d;
+  transition: transform 0.4s var(--ease), border-color 0.3s var(--ease), box-shadow 0.3s var(--ease);
+}
+.team-card:hover {
+  transform: perspective(800px) rotateX(-2deg) rotateY(3deg) translateY(-6px) !important;
+  box-shadow: 0 30px 60px rgba(0, 200, 255, 0.1), 0 0 40px rgba(0, 200, 255, 0.05);
+}
+.card-photo-wrap { position: relative; aspect-ratio: 1; overflow: hidden; border-radius: var(--radius-lg) var(--radius-lg) 0 0; }
 .card-photo { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s var(--ease); }
-.team-card:hover .card-photo { transform: scale(1.05); }
-.card-photo-glow { position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,200,255,0.15) 0%, transparent 60%); }
+.team-card:hover .card-photo { transform: scale(1.08); }
+.card-photo-glow {
+  position: absolute; inset: 0;
+  background: linear-gradient(to top, rgba(0,200,255,0.2) 0%, transparent 60%);
+  opacity: 0.6;
+  transition: opacity 0.4s;
+}
+.team-card:hover .card-photo-glow { opacity: 1; }
 .card-role-badge {
   position: absolute; bottom: 0.75rem; left: 0.75rem;
   font-size: 0.7rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase;
@@ -92,3 +107,25 @@ const photoPosition = photoPositions[member.id] ?? 'top center';
 }
 .card-upwork-link:hover { opacity: 0.75; }
 </style>
+
+<script>
+  // CSS 3D tilt on hover for team cards
+  document.querySelectorAll('[data-tilt-team]').forEach((card) => {
+    const el = card as HTMLElement;
+
+    el.addEventListener('mousemove', (e: MouseEvent) => {
+      const rect = el.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      const centerX = rect.width / 2;
+      const centerY = rect.height / 2;
+      const rotateY = ((x - centerX) / centerX) * 8;
+      const rotateX = -((y - centerY) / centerY) * 5;
+      el.style.transform = `perspective(800px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-6px)`;
+    });
+
+    el.addEventListener('mouseleave', () => {
+      el.style.transform = '';
+    });
+  });
+</script>

@@ -2,6 +2,7 @@
 import Layout from '../layouts/Layout.astro';
 import TeamCard from '../components/TeamCard.astro';
 import CTASection from '../components/CTASection.astro';
+import ThreeScene from '../components/ThreeScene.tsx';
 import { team } from '../data/team';
 
 const pageSchema = {
@@ -41,20 +42,21 @@ const pageSchema = {
       </video>
       <div class="section-video-overlay"></div>
     </div>
+    <ThreeScene client:visible />
     <div class="page-hero-bg" aria-hidden="true"></div>
     <div class="container rel">
-      <span class="section-tag reveal">The Team</span>
-      <h1 class="team-hero-heading reveal" id="team-heading">
+      <span class="section-tag reveal-3d-scale" style="transition-delay:0s">The Team</span>
+      <h1 class="team-hero-heading reveal-3d" id="team-heading" style="transition-delay:0.1s">
         People Behind <span class="text-accent">Qignite</span>
       </h1>
-      <p class="page-sub reveal">
+      <p class="page-sub reveal-3d" style="transition-delay:0.2s">
         A compact, expert team of engineers, QA specialists, and AI innovators. Each one bringing deep expertise and a quality-first mindset to every project.
       </p>
     </div>
   </section>
 
   <!-- LEADERSHIP -->
-  <section class="section has-video" aria-labelledby="leadership-heading">
+  <section class="section has-video parallax-section" aria-labelledby="leadership-heading" data-parallax="0.04">
     <div class="section-video-bg" aria-hidden="true">
       <video autoplay muted loop playsinline preload="none">
         <source src="/videos/services-bg.mp4" type="video/mp4" />
@@ -62,7 +64,7 @@ const pageSchema = {
       <div class="section-video-overlay"></div>
     </div>
     <div class="container rel">
-      <div class="section-header reveal-left">
+      <div class="section-header reveal-3d-left" style="transition-delay:0s">
         <span class="section-tag">Leadership</span>
         <h2 class="display-md" id="leadership-heading">
           <span class="text-accent">Visionaries</span> at the Helm
@@ -75,7 +77,7 @@ const pageSchema = {
   </section>
 
   <!-- ENGINEERING -->
-  <section class="section engineers-section has-video" aria-labelledby="engineers-heading">
+  <section class="section engineers-section has-video parallax-section" aria-labelledby="engineers-heading" data-parallax="0.03">
     <div class="section-video-bg" aria-hidden="true">
       <video autoplay muted loop playsinline preload="none">
         <source src="/videos/about-bg.mp4" type="video/mp4" />
@@ -83,7 +85,7 @@ const pageSchema = {
       <div class="section-video-overlay"></div>
     </div>
     <div class="container rel">
-      <div class="section-header reveal-left">
+      <div class="section-header reveal-3d-left" style="transition-delay:0s">
         <span class="section-tag">Engineering</span>
         <h2 class="display-md" id="engineers-heading">
           Builders & <span class="text-accent">Specialists</span>
@@ -96,7 +98,7 @@ const pageSchema = {
   </section>
 
   <!-- CULTURE -->
-  <section class="culture-section section has-video" aria-labelledby="culture-heading">
+  <section class="culture-section section has-video parallax-section" aria-labelledby="culture-heading" data-parallax="0.04">
     <div class="section-video-bg" aria-hidden="true">
       <video autoplay muted loop playsinline preload="none">
         <source src="/videos/services-preview-bg.mp4" type="video/mp4" />
@@ -104,7 +106,7 @@ const pageSchema = {
       <div class="section-video-overlay"></div>
     </div>
     <div class="container rel">
-      <div class="culture-inner card reveal">
+      <div class="culture-inner card reveal-3d-scale" style="transition-delay:0s">
         <div class="culture-text">
           <span class="section-tag">Culture</span>
           <h2 class="display-md" id="culture-heading">
@@ -123,7 +125,7 @@ const pageSchema = {
   </section>
 
   <!-- JOIN -->
-  <section class="section join-section has-video" aria-labelledby="join-heading">
+  <section class="section join-section has-video parallax-section" aria-labelledby="join-heading" data-parallax="0.05">
     <div class="section-video-bg" aria-hidden="true">
       <video autoplay muted loop playsinline preload="none">
         <source src="/videos/cta-bg.mp4" type="video/mp4" />
@@ -131,7 +133,7 @@ const pageSchema = {
       <div class="section-video-overlay"></div>
     </div>
     <div class="container rel">
-      <div class="section-header centered reveal">
+      <div class="section-header centered reveal-3d" style="transition-delay:0s">
         <span class="section-tag">Community</span>
         <h2 class="display-md" id="join-heading">
           Interested in <span class="text-accent">QA & AI?</span>
@@ -151,7 +153,7 @@ const pageSchema = {
 </Layout>
 
 <style>
-/* Shared video bg — copied verbatim from services.astro */
+/* Shared video bg — same as other pages */
 .has-video { position: relative; overflow: hidden; }
 .rel { position: relative; z-index: 2; }
 .section-video-bg { position: absolute; inset: 0; z-index: 0; }
@@ -167,7 +169,7 @@ const pageSchema = {
   );
 }
 
-/* Page hero — copied verbatim from services.astro */
+/* Page hero */
 .page-hero { padding-top: 10rem; padding-bottom: 5rem; }
 .page-hero-bg {
   position: absolute; inset: 0; z-index: 1; pointer-events: none;
@@ -178,7 +180,7 @@ const pageSchema = {
   mask-image: linear-gradient(to bottom, black 60%, transparent);
 }
 
-/* Heading — matches services-hero-heading */
+/* Heading */
 .team-hero-heading {
   font-family: var(--font-heading);
   font-size: clamp(2.4rem, 5.5vw, 4.5rem);
@@ -201,7 +203,10 @@ const pageSchema = {
 .engineers-section { border-top: 1px solid var(--clr-border); border-bottom: 1px solid var(--clr-border); }
 
 /* Culture */
-.culture-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; padding: 3rem; align-items: center; overflow: hidden; }
+.culture-inner {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; padding: 3rem; align-items: center; overflow: hidden;
+  transform-style: preserve-3d;
+}
 .culture-text { display: flex; flex-direction: column; gap: 1rem; min-width: 0; }
 .culture-text p { color: var(--clr-muted); line-height: 1.8; }
 .culture-quote { display: flex; align-items: center; min-width: 0; }

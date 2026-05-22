@@ -1,6 +1,7 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import CTASection from '../components/CTASection.astro';
+import ThreeScene from '../components/ThreeScene.tsx';
 
 const values = [
   { icon: '⚡', title: 'Precision First', desc: 'Every bug caught, every edge case explored. We don\'t ship guesses.' },
@@ -43,20 +44,22 @@ const pageSchema = {
       </video>
       <div class="section-video-overlay"></div>
     </div>
+    <!-- Three.js particles in hero -->
+    <ThreeScene client:visible />
     <div class="page-hero-bg" aria-hidden="true"></div>
     <div class="container rel">
-      <span class="section-tag reveal">Company</span>
-      <h1 class="about-hero-heading reveal" id="about-heading">
+      <span class="section-tag reveal-3d-scale" style="transition-delay:0s">Company</span>
+      <h1 class="about-hero-heading reveal-3d" id="about-heading" style="transition-delay:0.1s">
         We Build Software <span class="text-accent">Quality</span> at Scale
       </h1>
-      <p class="page-hero-sub reveal">
+      <p class="page-hero-sub reveal-3d" style="transition-delay:0.2s">
         Qignite is an AI-driven software quality assurance company focused on modernizing testing and support workflows across healthcare and enterprise platforms operating in international markets.
       </p>
     </div>
   </section>
 
   <!-- ═══ MISSION / VISION ═══ -->
-  <section class="section mv-section has-video" aria-labelledby="mission-heading">
+  <section class="section mv-section has-video parallax-section" aria-labelledby="mission-heading" data-parallax="0.04">
     <div class="section-video-bg" aria-hidden="true">
       <video autoplay muted loop playsinline preload="none">
         <source src="/videos/hero-bg.mp4" type="video/mp4" />
@@ -65,12 +68,12 @@ const pageSchema = {
     </div>
     <div class="container rel">
       <div class="mv-grid">
-        <div class="mv-card card reveal" style="transition-delay:0s">
+        <div class="mv-card card reveal-3d-left" style="transition-delay:0s" data-tilt-about>
           <span class="mv-icon">🎯</span>
           <h2 id="mission-heading">Our Mission</h2>
           <p>To deliver intelligent, reliable quality assurance solutions that help healthcare and enterprise organizations ship software with confidence — combining proven QA practices with cutting-edge AI automation.</p>
         </div>
-        <div class="mv-card card reveal" style="transition-delay:0.12s">
+        <div class="mv-card card reveal-3d-left" style="transition-delay:0.15s" data-tilt-about>
           <span class="mv-icon">🔭</span>
           <h2>Our Vision</h2>
           <p>A world where AI-powered quality engineering is accessible to every software team — where bugs are caught before they reach users, and software reliability is the default, not the exception.</p>
@@ -80,7 +83,7 @@ const pageSchema = {
   </section>
 
   <!-- ═══ WHAT WE SPECIALIZE IN ═══ -->
-  <section class="section what-section has-video" aria-labelledby="what-heading">
+  <section class="section what-section has-video parallax-section" aria-labelledby="what-heading" data-parallax="0.03">
     <div class="section-video-bg" aria-hidden="true">
       <video autoplay muted loop playsinline preload="none">
         <source src="/videos/about-bg.mp4" type="video/mp4" />
@@ -88,24 +91,24 @@ const pageSchema = {
       <div class="section-video-overlay"></div>
     </div>
     <div class="container rel">
-      <div class="section-header reveal-left">
+      <div class="section-header reveal-3d-left" style="transition-delay:0s">
         <span class="section-tag">Expertise</span>
         <h2 class="display-md" id="what-heading">What We <span class="text-accent">Specialize In</span></h2>
       </div>
       <div class="what-grid">
-        <div class="what-item reveal" style="transition-delay:0s">
+        <div class="what-item reveal-3d" style="transition-delay:0s">
           <h3>AI-Powered Testing Workflows</h3>
           <p>We design and implement intelligent automation strategies that use machine learning to detect patterns, predict failures, and self-heal test scripts — dramatically reducing maintenance overhead.</p>
         </div>
-        <div class="what-item reveal" style="transition-delay:0.1s">
+        <div class="what-item reveal-3d" style="transition-delay:0.1s">
           <h3>Healthcare & Digital Pathology</h3>
           <p>Specialized QA for healthcare systems, EHRs, and digital pathology platforms. We understand the compliance requirements and safety implications unique to healthcare software.</p>
         </div>
-        <div class="what-item reveal" style="transition-delay:0.2s">
+        <div class="what-item reveal-3d" style="transition-delay:0.2s">
           <h3>Enterprise QA Engineering</h3>
           <p>End-to-end quality engineering services — from strategy to execution. We embed QA into your CI/CD pipeline, ensuring quality at every stage of development.</p>
         </div>
-        <div class="what-item reveal" style="transition-delay:0.3s">
+        <div class="what-item reveal-3d" style="transition-delay:0.3s">
           <h3>AI Customer Support</h3>
           <p>Intelligent support agents built on LLMs that resolve issues faster, reduce ticket volume, and provide consistent accurate answers — available around the clock for your users.</p>
         </div>
@@ -114,7 +117,7 @@ const pageSchema = {
   </section>
 
   <!-- ═══ VALUES ═══ -->
-  <section class="section values-section has-video" aria-labelledby="values-heading">
+  <section class="section values-section has-video parallax-section" aria-labelledby="values-heading" data-parallax="0.05">
     <div class="section-video-bg" aria-hidden="true">
       <video autoplay muted loop playsinline preload="none">
         <source src="/videos/services-bg.mp4" type="video/mp4" />
@@ -122,13 +125,13 @@ const pageSchema = {
       <div class="section-video-overlay"></div>
     </div>
     <div class="container rel">
-      <div class="section-header centered reveal">
+      <div class="section-header centered reveal-3d" style="transition-delay:0s">
         <span class="section-tag">Culture</span>
         <h2 class="display-md" id="values-heading">What We <span class="text-accent">Stand For</span></h2>
       </div>
       <div class="values-grid">
         {values.map((v, i) => (
-          <div class="value-card card reveal" style={`transition-delay:${i*0.08}s`}>
+          <div class="value-card card reveal-3d" style={`transition-delay:${i*0.1}s`} data-tilt-about>
             <span class="value-icon" aria-hidden="true">{v.icon}</span>
             <h3>{v.title}</h3>
             <p>{v.desc}</p>
@@ -139,7 +142,7 @@ const pageSchema = {
   </section>
 
   <!-- ═══ TIMELINE ═══ -->
-  <section class="section timeline-section has-video" aria-labelledby="journey-heading">
+  <section class="section timeline-section has-video parallax-section" aria-labelledby="journey-heading" data-parallax="0.03">
     <div class="section-video-bg" aria-hidden="true">
       <video autoplay muted loop playsinline preload="none">
         <source src="/videos/cta-bg.mp4" type="video/mp4" />
@@ -147,13 +150,13 @@ const pageSchema = {
       <div class="section-video-overlay"></div>
     </div>
     <div class="container rel">
-      <div class="section-header reveal-left">
+      <div class="section-header reveal-3d-left" style="transition-delay:0s">
         <span class="section-tag">Journey</span>
         <h2 class="display-md" id="journey-heading">Our <span class="text-accent">Story So Far</span></h2>
       </div>
       <div class="timeline">
         {milestones.map((m, i) => (
-          <div class="timeline-item reveal" style={`transition-delay:${i*0.1}s`}>
+          <div class="timeline-item reveal-3d-left" style={`transition-delay:${i*0.12}s`}>
             <div class="timeline-year">{m.year}</div>
             <div class="timeline-dot" aria-hidden="true"></div>
             <div class="timeline-content card">
@@ -220,7 +223,15 @@ const pageSchema = {
 
 /* ── Mission / Vision ── */
 .mv-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
-.mv-card { padding: 2.5rem; display: flex; flex-direction: column; gap: 1rem; }
+.mv-card {
+  padding: 2.5rem; display: flex; flex-direction: column; gap: 1rem;
+  transform-style: preserve-3d;
+  transition: transform 0.4s var(--ease), box-shadow 0.3s var(--ease);
+}
+.mv-card:hover {
+  transform: perspective(800px) rotateX(-2deg) rotateY(3deg) translateY(-4px) !important;
+  box-shadow: 0 25px 50px rgba(0, 200, 255, 0.1);
+}
 .mv-icon { font-size: 2rem; }
 .mv-card h2 { font-size: 1.5rem; font-weight: 700; color: var(--clr-accent); }
 .mv-card p { color: var(--clr-muted); line-height: 1.8; }
@@ -228,14 +239,28 @@ const pageSchema = {
 /* ── What we specialize in ── */
 .what-section { background: var(--clr-bg-2); border-top: 1px solid var(--clr-border); border-bottom: 1px solid var(--clr-border); }
 .what-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
-.what-item { padding: 2rem; border-left: 2px solid var(--clr-border); transition: border-color 0.3s; }
-.what-item:hover { border-left-color: var(--clr-accent); }
+.what-item {
+  padding: 2rem; border-left: 2px solid var(--clr-border);
+  transition: border-color 0.3s, transform 0.3s var(--ease);
+}
+.what-item:hover {
+  border-left-color: var(--clr-accent);
+  transform: translateX(8px);
+}
 .what-item h3 { font-size: 1.1rem; font-weight: 700; margin-bottom: 0.75rem; color: var(--clr-text); }
 .what-item p { color: var(--clr-muted); line-height: 1.75; font-size: 0.95rem; }
 
 /* ── Values ── */
 .values-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
-.value-card { padding: 2rem; display: flex; flex-direction: column; gap: 0.75rem; }
+.value-card {
+  padding: 2rem; display: flex; flex-direction: column; gap: 0.75rem;
+  transform-style: preserve-3d;
+  transition: transform 0.4s var(--ease), box-shadow 0.3s var(--ease);
+}
+.value-card:hover {
+  transform: perspective(800px) rotateX(-2deg) rotateY(3deg) translateY(-4px) !important;
+  box-shadow: 0 25px 50px rgba(0, 200, 255, 0.1);
+}
 .value-icon { font-size: 1.75rem; }
 .value-card h3 { font-size: 1.05rem; font-weight: 700; color: var(--clr-text); }
 .value-card p { font-size: 0.9rem; color: var(--clr-muted); line-height: 1.7; }
@@ -246,7 +271,14 @@ const pageSchema = {
 .timeline-item::before { content: ''; position: absolute; left: -5px; top: 6px; width: 9px; height: 9px; border-radius: 50%; background: var(--clr-accent); box-shadow: 0 0 12px var(--clr-glow); }
 .timeline-year { font-family: var(--font-heading); font-size: 0.9rem; font-weight: 700; color: var(--clr-accent); padding-top: 0.25rem; text-align: right; }
 .timeline-dot { display: none; }
-.timeline-content { padding: 1.25rem 1.5rem; }
+.timeline-content {
+  padding: 1.25rem 1.5rem;
+  transition: transform 0.3s var(--ease), box-shadow 0.3s;
+}
+.timeline-content:hover {
+  transform: translateX(8px);
+  box-shadow: 0 10px 30px rgba(0, 200, 255, 0.08);
+}
 .timeline-content h3 { font-size: 1.05rem; font-weight: 700; margin-bottom: 0.5rem; }
 .timeline-content p { font-size: 0.9rem; color: var(--clr-muted); line-height: 1.7; }
 
@@ -258,3 +290,21 @@ const pageSchema = {
 }
 @media (max-width: 480px) { .values-grid { grid-template-columns: 1fr; } }
 </style>
+
+<script>
+  // 3D tilt for about page cards
+  document.querySelectorAll('[data-tilt-about]').forEach((card) => {
+    const el = card as HTMLElement;
+    el.addEventListener('mousemove', (e: MouseEvent) => {
+      const rect = el.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      const centerX = rect.width / 2;
+      const centerY = rect.height / 2;
+      const rotateY = ((x - centerX) / centerX) * 6;
+      const rotateX = -((y - centerY) / centerY) * 4;
+      el.style.transform = `perspective(800px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-4px)`;
+    });
+    el.addEventListener('mouseleave', () => { el.style.transform = ''; });
+  });
+</script>

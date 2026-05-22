@@ -107,18 +107,34 @@ const current = Astro.url.pathname;
 </style>
 
 <script>
-const header    = document.getElementById('site-header')!;
-const hamburger = document.getElementById('hamburger')!;
-const navMobile = document.getElementById('nav-mobile')!;
+  let header: HTMLElement | null = null;
+  let hamburger: HTMLElement | null = null;
+  let navMobile: HTMLElement | null = null;
 
-window.addEventListener('scroll', () => {
-  header.classList.toggle('scrolled', window.scrollY > 30);
-}, { passive: true });
+  function initHeader() {
+    header = document.getElementById('site-header');
+    hamburger = document.getElementById('hamburger');
+    navMobile = document.getElementById('nav-mobile');
 
-hamburger.addEventListener('click', () => {
-  const open = hamburger.classList.toggle('open');
-  navMobile.classList.toggle('open', open);
-  hamburger.setAttribute('aria-expanded', String(open));
-  navMobile.setAttribute('aria-hidden', String(!open));
-});
+    if (hamburger && navMobile) {
+      hamburger.addEventListener('click', () => {
+        const open = hamburger!.classList.toggle('open');
+        navMobile!.classList.toggle('open', open);
+        hamburger!.setAttribute('aria-expanded', String(open));
+        navMobile!.setAttribute('aria-hidden', String(!open));
+      });
+    }
+  }
+
+  // Add scroll listener only once per session
+  if (!(window as any)._headerScrollInit) {
+    (window as any)._headerScrollInit = true;
+    window.addEventListener('scroll', () => {
+      if (header) {
+        header.classList.toggle('scrolled', window.scrollY > 30);
+      }
+    }, { passive: true });
+  }
+
+  document.addEventListener('astro:page-load', initHeader);
 </script>

@@ -1,0 +1,74 @@
+---
+/* ScrollParallax — adds depth-based scroll animations to sections */
+---
+
+<script>
+  // Parallax depth system — different scroll speeds per section
+  function initParallax() {
+    if (window.innerWidth <= 768) return; // Skip on mobile
+
+    const sections = document.querySelectorAll('[data-parallax]');
+
+    function updateParallax() {
+      const scrollY = window.scrollY;
+      const windowH = window.innerHeight;
+
+      sections.forEach((section) => {
+        const el = section as HTMLElement;
+        const speed = parseFloat(el.dataset.parallax || '0.1');
+        const rect = el.getBoundingClientRect();
+        const inView = rect.top < windowH && rect.bottom > 0;
+
+        if (inView) {
+          const progress = (windowH - rect.top) / (windowH + rect.height);
+          const yOffset = (progress - 0.5) * speed * 100;
+          el.style.transform = `translate3d(0, ${yOffset}px, 0)`;
+        }
+      });
+    }
+
+    window.addEventListener('scroll', updateParallax, { passive: true });
+    updateParallax();
+  }
+
+  // 3D reveal animations on scroll
+  function init3DReveals() {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('revealed-3d');
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.15, rootMargin: '0px 0px -50px 0px' }
+    );
+
+    document.querySelectorAll('.reveal-3d, .reveal-3d-left, .reveal-3d-up, .reveal-3d-scale').forEach((el) => {
+      observer.observe(el);
+    });
+  }
+
+  // Scroll progress indicator
+  function initScrollProgress() {
+    const progressBar = document.getElementById('scroll-progress');
+    if (!progressBar) return;
+
+    function updateProgress() {
+      const scrollTop = window.scrollY;
+      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const progress = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+      progressBar.style.width = progress + '%';
+    }
+
+    window.addEventListener('scroll', updateProgress, { passive: true });
+    updateProgress();
+  }
+
+  document.addEventListener('astro:page-load', () => {
+    initParallax();
+    init3DReveals();
+    initScrollProgress();
+  });
+</script>

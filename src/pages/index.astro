@@ -34,7 +34,7 @@ const pageSchema = {
 
   <Stats />
 
-  <section class="section services-preview has-video-bg" aria-labelledby="services-heading">
+  <section class="section services-preview has-video-bg parallax-section" aria-labelledby="services-heading" data-parallax="0.05">
     <div class="video-bg-wrap" aria-hidden="true">
       <video autoplay muted loop playsinline preload="none">
         <source src="/videos/services-preview-bg.mp4" type="video/mp4" />
@@ -43,7 +43,7 @@ const pageSchema = {
     <div class="bg-overlay" aria-hidden="true"></div>
 
     <div class="container content-on-top">
-      <div class="section-header reveal-left">
+      <div class="section-header reveal-3d-left" style="transition-delay: 0s">
         <span class="section-tag">What We Do</span>
         <h2 class="display-md" id="services-heading">
           QA Solutions Built for <span class="text-accent">Modern Software</span>
@@ -55,34 +55,34 @@ const pageSchema = {
       <div class="services-grid">
         {services.map((s, i) => <ServiceCard service={s} index={i} />)}
       </div>
-      <div style="text-align:center; margin-top:3rem;" class="reveal">
+      <div style="text-align:center; margin-top:3rem;" class="reveal-3d-up" style="transition-delay: 0.5s">
         <a href="/services" class="btn btn-outline">View All Services →</a>
       </div>
     </div>
   </section>
 
-  <section class="about-strip section" aria-labelledby="about-strip-heading">
+  <section class="about-strip section parallax-section" aria-labelledby="about-strip-heading" data-parallax="0.03">
     <div class="about-strip-video" aria-hidden="true">
       <video autoplay muted loop playsinline preload="none">
         <source src="/videos/about-bg.mp4" type="video/mp4" />
       </video>
     </div>
     <div class="container about-strip-inner">
-      <div class="about-strip-text reveal-left">
+      <div class="about-strip-text reveal-3d-left" style="transition-delay: 0s">
         <span class="section-tag">Our Mission</span>
         <h2 class="display-md" id="about-strip-heading">Quality is not optional. <span class="text-accent">It's the foundation.</span></h2>
         <p>We believe great software starts with rigorous quality assurance. At Qignite, we combine proven QA practices with cutting-edge AI tools — so your products are built right, shipped fast, and trusted at scale.</p>
         <a href="/about" class="btn btn-outline" style="margin-top:1.75rem;">Our Story →</a>
       </div>
-      <div class="about-strip-badges reveal">
+      <div class="about-strip-badges reveal-3d" style="transition-delay: 0.2s">
         {['AI-Powered Testing', 'Healthcare QA', 'Enterprise Grade', 'International Markets', '24/7 AI Support', 'CI/CD Integration'].map(b => (
-          <span class="badge">{b}</span>
+          <span class="badge float-badge">{b}</span>
         ))}
       </div>
     </div>
   </section>
 
-  <section class="section team-preview has-video-bg" aria-labelledby="team-preview-heading">
+  <section class="section team-preview has-video-bg parallax-section" aria-labelledby="team-preview-heading" data-parallax="0.04">
     <div class="video-bg-wrap" aria-hidden="true">
       <video autoplay muted loop playsinline preload="none">
         <source src="/videos/team-preview-bg.mp4" type="video/mp4" />
@@ -91,7 +91,7 @@ const pageSchema = {
     <div class="bg-overlay" aria-hidden="true"></div>
 
     <div class="container content-on-top">
-      <div class="section-header centered reveal">
+      <div class="section-header centered reveal-3d" style="transition-delay: 0s">
         <span class="section-tag">The People</span>
         <h2 class="display-md" id="team-preview-heading">Built by <span class="text-accent">Experts</span></h2>
         <p class="text-muted" style="margin-top:1rem; font-size:1rem; line-height:1.75;">
@@ -101,7 +101,7 @@ const pageSchema = {
       <div class="team-grid-preview">
         {featuredTeam.map((m, i) => <TeamCard member={m} index={i} />)}
       </div>
-      <div style="text-align:center; margin-top:3rem;" class="reveal">
+      <div style="text-align:center; margin-top:3rem;" class="reveal-3d-up" style="transition-delay: 0.4s">
         <a href="/team" class="btn btn-outline">Meet the Full Team →</a>
       </div>
     </div>

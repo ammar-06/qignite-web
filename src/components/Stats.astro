@@ -20,11 +20,6 @@ const { stats = [
 ---
 
 <section class="stats-section section" aria-label="Qignite by the numbers">
-  <div class="video-bg-wrap" aria-hidden="true">
-    <video autoplay muted loop playsinline preload="none">
-      <source src="/videos/stats-bg.mp4" type="video/mp4" />
-    </video>
-  </div>
 
   <div class="stats-bg" aria-hidden="true"></div>
 
@@ -32,8 +27,8 @@ const { stats = [
     <div class="stats-grid">
       {stats.map((stat: Stat, i: number) => (
         <div
-          class="stat-item reveal"
-          style={`transition-delay: ${i * 0.1}s`}
+          class="stat-item reveal-3d"
+          style={`transition-delay: ${i * 0.12}s`}
           data-numeric={stat.numeric ?? ''}
           data-suffix={stat.suffix ?? ''}
           data-value={stat.value}
@@ -81,6 +76,11 @@ const { stats = [
   text-align: center;
   padding: 3rem 2rem;
   position: relative;
+  /* 3D hover effect */
+  transition: transform 0.4s var(--ease);
+}
+.stat-item:hover {
+  transform: perspective(600px) translateY(-4px) scale(1.02) !important;
 }
 .stat-item:not(:last-child)::after {
   content: '';
@@ -89,7 +89,10 @@ const { stats = [
   width: 1px;
   background: var(--clr-border);
 }
-.stat-value { margin-bottom: 0.75rem; }
+
+
+
+.stat-value { margin-bottom: 0.75rem; position: relative; z-index: 1; }
 .stat-num {
   font-family: var(--font-heading);
   font-size: clamp(2.5rem, 5vw, 4rem);
@@ -177,19 +180,21 @@ const { stats = [
     requestAnimationFrame(tick);
   }
 
-  const observer = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          animateCounter(entry.target as HTMLElement);
-          observer.unobserve(entry.target);
-        }
-      });
-    },
-    { threshold: 0.4 }
-  );
+  document.addEventListener('astro:page-load', () => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            animateCounter(entry.target as HTMLElement);
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.4 }
+    );
 
-  document.querySelectorAll('.stat-item').forEach((el) => {
-    observer.observe(el);
+    document.querySelectorAll('.stat-item').forEach((el) => {
+      observer.observe(el);
+    });
   });
 </script>

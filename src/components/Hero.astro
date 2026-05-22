@@ -1,5 +1,6 @@
 ---
 import QigniteHero from './QigniteHero.tsx';
+import ThreeScene from './ThreeScene.tsx';
 
 interface Props {
   sub?: string;
@@ -23,6 +24,9 @@ const {
     </video>
   </div>
 
+  <!-- Three.js Particle Scene -->
+  <ThreeScene client:visible />
+
   <div class="hero-overlay" aria-hidden="true"></div>
   <div class="hero-grid" aria-hidden="true"></div>
 
@@ -32,9 +36,9 @@ const {
       <QigniteHero client:load />
     </div>
 
-    {sub && <p class="hero-sub">{sub}</p>}
+    {sub && <p class="hero-sub reveal-3d" style="transition-delay: 0.8s">{sub}</p>}
 
-    <div class="hero-ctas">
+    <div class="hero-ctas reveal-3d-up" style="transition-delay: 1.0s">
       <a href={ctaPrimary.href} class="btn btn-primary">
         {ctaPrimary.label}
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
@@ -86,11 +90,9 @@ const {
   max-width: 540px;
   line-height: 1.75;
   margin-bottom: 2.5rem;
-  animation: heroIn 1s 0.85s var(--ease) both;
 }
 .hero-ctas {
   display: flex; flex-wrap: wrap; gap: 1rem;
-  animation: heroIn 1s 1s var(--ease) both;
 }
 
 /* Orbs */
@@ -98,10 +100,6 @@ const {
 .orb-1 { width: 600px; height: 600px; background: radial-gradient(circle, rgba(0,200,255,0.12), transparent 70%); top: -100px; right: -150px; animation: orbFloat 8s ease-in-out infinite; }
 .orb-2 { width: 400px; height: 400px; background: radial-gradient(circle, rgba(59,111,255,0.10), transparent 70%); bottom: 0; left: 30%; animation: orbFloat 10s 2s ease-in-out infinite reverse; }
 
-@keyframes heroIn {
-  from { opacity: 0; transform: translateY(30px); }
-  to   { opacity: 1; transform: translateY(0); }
-}
 @keyframes orbFloat {
   0%, 100% { transform: translateY(0) scale(1); }
   50%        { transform: translateY(-30px) scale(1.05); }

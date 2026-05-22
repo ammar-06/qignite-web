@@ -54,9 +54,31 @@ const glowVariants: any = {
   },
 };
 
+const floatingVariants: any = {
+  animate: (i: number) => ({
+    y: [0, -15, 0],
+    rotateX: [0, 15, -5, 0],
+    rotateY: [0, -15, 10, 0],
+    rotateZ: [0, 4, -2, 0],
+    transition: {
+      duration: 4.5,
+      repeat: Infinity,
+      ease: 'easeInOut',
+      delay: i * 0.15, // Staggers the continuous floating wave
+    },
+  }),
+  hover: {
+    scale: 1.2,
+    rotateX: 25,
+    rotateY: 20,
+    y: -15,
+    transition: { type: 'spring', stiffness: 400, damping: 12 },
+  },
+};
+
 export default function QigniteHero() {
   return (
-    <div style={{ position: 'relative', perspective: '800px' }}>
+    <div className="qignite-hero-wrap">
       {/* Animated glow behind the text */}
       <motion.div
         variants={glowVariants}
@@ -69,6 +91,7 @@ export default function QigniteHero() {
           borderRadius: '50%',
           pointerEvents: 'none',
           zIndex: 0,
+          transform: 'translateZ(-100px)',
         }}
       />
 
@@ -82,6 +105,7 @@ export default function QigniteHero() {
           gap: '0.02em',
           position: 'relative',
           zIndex: 1,
+          transformStyle: 'preserve-3d',
         }}
       >
         {letters.map((letter, i) => (
@@ -90,31 +114,37 @@ export default function QigniteHero() {
             variants={letterVariants}
             style={{
               display: 'inline-block',
-              fontFamily: 'var(--font-heading)',
-              fontSize: 'clamp(2.5rem, 13vw, 11rem)',
-              fontWeight: 900,
-              lineHeight: 1,
-              letterSpacing: '-0.03em',
-              background:
-                i === 0
-                  ? 'linear-gradient(135deg, #ffffff 0%, #00c8ff 100%)'
-                  : i < 3
-                  ? `linear-gradient(135deg, hsl(${195 + i * 15}, 100%, ${70 - i * 3}%) 0%, hsl(${210 + i * 10}, 100%, 55%) 100%)`
-                  : `linear-gradient(135deg, hsl(${220 + (i - 3) * 10}, 100%, 60%) 0%, hsl(${240 + (i - 3) * 8}, 100%, 50%) 100%)`,
-              WebkitBackgroundClip: 'text',
-              WebkitTextFillColor: 'transparent',
-              backgroundClip: 'text',
-              transformOrigin: 'bottom center',
-              cursor: 'default',
-              userSelect: 'none',
-            }}
-            whileHover={{
-              scale: 1.15,
-              y: -8,
-              transition: { type: 'spring', stiffness: 400, damping: 12 },
+              transformStyle: 'preserve-3d',
             }}
           >
-            {letter}
+            <motion.span
+              custom={i}
+              variants={floatingVariants}
+              animate="animate"
+              whileHover="hover"
+              style={{
+                display: 'inline-block',
+                fontFamily: 'var(--font-heading)',
+                fontSize: 'clamp(2.5rem, 13vw, 11rem)',
+                fontWeight: 900,
+                lineHeight: 1,
+                letterSpacing: '-0.03em',
+                background:
+                  i === 0
+                    ? 'linear-gradient(135deg, #ffffff 0%, #00c8ff 100%)'
+                    : i < 3
+                    ? `linear-gradient(135deg, hsl(${195 + i * 15}, 100%, ${70 - i * 3}%) 0%, hsl(${210 + i * 10}, 100%, 55%) 100%)`
+                    : `linear-gradient(135deg, hsl(${220 + (i - 3) * 10}, 100%, 60%) 0%, hsl(${240 + (i - 3) * 8}, 100%, 50%) 100%)`,
+                WebkitBackgroundClip: 'text',
+                WebkitTextFillColor: 'transparent',
+                backgroundClip: 'text',
+                transformOrigin: 'center center',
+                cursor: 'default',
+                userSelect: 'none',
+              }}
+            >
+              {letter}
+            </motion.span>
           </motion.span>
         ))}
       </motion.div>
