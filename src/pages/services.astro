@@ -77,7 +77,6 @@ const pageSchema = {
     <ThreeScene client:visible />
     <div class="page-hero-bg" aria-hidden="true"></div>
     <div class="container rel">
-      <span class="section-tag reveal-3d-scale" style="transition-delay:0s">Services</span>
       <h1 class="services-hero-heading reveal-3d" id="services-heading" style="transition-delay:0.1s">
         Intelligent QA <span class="text-accent">for Every Layer</span>
       </h1>
@@ -89,11 +88,9 @@ const pageSchema = {
 
   <!-- WHAT WE OFFER -->
   <section class="section has-3d parallax-section" aria-labelledby="our-services-heading" data-parallax="0.04">
-    <ParticleField client:visible count={150} opacity={0.35} />
     <div class="section-3d-overlay" aria-hidden="true"></div>
     <div class="container rel">
       <div class="section-header centered reveal-3d" style="transition-delay:0s">
-        <span class="section-tag">What We Offer</span>
         <h2 class="display-md" id="our-services-heading">
           Built for <span class="text-accent">Real-World Production</span>
         </h2>
@@ -108,12 +105,9 @@ const pageSchema = {
   </section>
 
   <!-- PROCESS -->
-  <section class="section process-section has-3d parallax-section" aria-labelledby="process-heading" data-parallax="0.03">
-    <GridPlane client:visible opacity={0.08} />
-    <div class="section-3d-overlay" aria-hidden="true"></div>
-    <div class="container rel">
+  <section class="section process-section parallax-section" aria-labelledby="process-heading" data-parallax="0.03">
+    <div class="container">
       <div class="section-header reveal-3d-left" style="transition-delay:0s">
-        <span class="section-tag">Process</span>
         <h2 class="display-md" id="process-heading">
           How We <span class="text-accent">Work</span>
         </h2>
@@ -136,12 +130,9 @@ const pageSchema = {
   </section>
 
   <!-- TOOLS WE MASTER -->
-  <section class="section tech-section has-3d parallax-section" aria-labelledby="tech-heading" data-parallax="0.05">
-    <ParticleField client:visible color="#3B6FFF" color2="#00C8FF" count={100} opacity={0.3} speed={0.6} />
-    <div class="section-3d-overlay" aria-hidden="true"></div>
-    <div class="container rel">
+  <section class="section tech-section parallax-section" aria-labelledby="tech-heading" data-parallax="0.05">
+    <div class="container">
       <div class="section-header centered reveal-3d" style="transition-delay:0s">
-        <span class="section-tag">Technology</span>
         <h2 class="display-md" id="tech-heading">
           Tools We <span class="text-accent">Master</span>
         </h2>
@@ -162,13 +153,10 @@ const pageSchema = {
   </section>
 
   <!-- INDUSTRIES -->
-  <section class="section industries-section has-3d parallax-section" aria-labelledby="industries-heading" data-parallax="0.03">
-    <WireframeGlobe client:visible size={12} opacity={0.06} />
-    <div class="section-3d-overlay" aria-hidden="true"></div>
-    <div class="container rel">
+  <section class="section industries-section parallax-section" aria-labelledby="industries-heading" data-parallax="0.03">
+    <div class="container">
       <div class="industries-inner">
         <div class="reveal-3d-left" style="transition-delay:0s">
-          <span class="section-tag">Industries</span>
           <h2 class="display-md" id="industries-heading">Who We Serve</h2>
           <p class="text-muted" style="margin-top:1rem; line-height:1.8; max-width:480px;">
             Qignite serves healthcare organizations, digital pathology platforms, and enterprise software companies operating in international markets.
@@ -209,17 +197,17 @@ const pageSchema = {
   background: linear-gradient(
     to bottom,
     var(--clr-bg) 0%,
-    rgba(2, 9, 24, 0.82) 30%,
-    rgba(2, 9, 24, 0.82) 70%,
+    rgba(247,248,250,0.6) 40%,
+    rgba(247,248,250,0.6) 60%,
     var(--clr-bg) 100%
   );
 }
 
 /* Page hero */
-.page-hero { padding-top: 10rem; padding-bottom: 5rem; }
+.page-hero { padding-top: 10rem; padding-bottom: 5rem; background: var(--clr-bg); }
 .page-hero-bg {
   position: absolute; inset: 0; z-index: 1; pointer-events: none;
-  background: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(0,200,255,0.07), transparent);
+  background: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(0,153,204,0.07), transparent);
   mask-image: linear-gradient(to bottom, black 60%, transparent);
 }
 
@@ -227,9 +215,9 @@ const pageSchema = {
 .services-hero-heading {
   font-family: var(--font-heading);
   font-size: clamp(2.4rem, 5.5vw, 4.5rem);
-  font-weight: 600;
-  line-height: 1.18;
-  letter-spacing: -0.02em;
+  font-weight: 700;
+  line-height: 1.15;
+  letter-spacing: -0.025em;
   color: var(--clr-text);
   max-width: 720px;
   margin-top: 1rem;
@@ -247,17 +235,18 @@ const pageSchema = {
   padding: 2rem 0; border-bottom: 1px solid var(--clr-border);
   transition: transform 0.3s var(--ease);
 }
-.process-step:hover { transform: translateX(8px); }
+.process-step:hover { transform: translateX(6px); }
 .process-step:last-child { border-bottom: none; }
-.process-step-num { font-family: var(--font-heading); font-size: 3rem; font-weight: 800; color: var(--clr-accent); opacity: 0.3; line-height: 1; }
-.process-step-content h3 { font-size: 1.15rem; font-weight: 700; margin-bottom: 0.5rem; }
+.process-step-num { font-family: var(--font-heading); font-size: 2.5rem; font-weight: 800; color: var(--clr-accent); opacity: 0.2; line-height: 1; }
+.process-step-content h3 { font-size: 1.1rem; font-weight: 700; margin-bottom: 0.5rem; }
 .process-step-content p { color: var(--clr-muted); line-height: 1.75; font-size: 0.95rem; }
 
 /* Tools */
+.tech-section { background: var(--clr-bg-3); border-top: 1px solid var(--clr-border); border-bottom: 1px solid var(--clr-border); }
 .tool-categories { display: flex; flex-direction: column; gap: 2.5rem; }
 .tool-category-title {
   font-family: var(--font-heading);
-  font-size: 0.8rem;
+  font-size: 0.72rem;
   font-weight: 700;
   letter-spacing: 0.12em;
   text-transform: uppercase;
@@ -268,13 +257,14 @@ const pageSchema = {
 }
 .tool-badges { display: flex; flex-wrap: wrap; gap: 0.6rem; }
 .tech-badge {
-  padding: 0.45rem 1rem; font-size: 0.82rem; font-weight: 500;
+  padding: 0.4rem 0.9rem; font-size: 0.8rem; font-weight: 500;
   color: var(--clr-muted); border-radius: 100px; cursor: default;
-  transition: color 0.2s, border-color 0.2s, transform 0.3s;
+  transition: color 0.2s, border-color 0.2s, transform 0.2s;
+  background: var(--clr-bg);
 }
 .tech-badge:hover {
-  color: var(--clr-accent); border-color: var(--clr-accent);
-  transform: translateY(-2px) !important;
+  color: var(--clr-accent); border-color: rgba(0,153,204,0.3);
+  transform: translateY(-1px) !important;
 }
 
 /* Industries */
@@ -285,9 +275,9 @@ const pageSchema = {
   display: flex; align-items: center; gap: 1.25rem; padding: 1.25rem 1.5rem;
   transition: transform 0.3s var(--ease);
 }
-.industry-item:hover { transform: translateX(8px); }
+.industry-item:hover { transform: translateX(6px); }
 .industry-icon { font-size: 1.75rem; flex-shrink: 0; }
-.industry-item h3 { font-size: 1rem; font-weight: 700; margin-bottom: 0.25rem; }
+.industry-item h3 { font-size: 0.95rem; font-weight: 700; margin-bottom: 0.25rem; }
 .industry-item p { font-size: 0.85rem; color: var(--clr-muted); }
 
 @media (max-width: 900px) {

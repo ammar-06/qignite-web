@@ -1,7 +1,4 @@
 ---
-import QigniteHero from './QigniteHero.tsx';
-import ThreeScene from './ThreeScene.tsx';
-
 interface Props {
   sub?: string;
   ctaPrimary?: { label: string; href: string };
@@ -17,30 +14,46 @@ const {
 
 <section class="hero">
 
-  <!-- Three.js Particle Scene -->
-  <ThreeScene client:visible />
+  <div class="hero-bg" aria-hidden="true"></div>
 
-  <div class="hero-overlay" aria-hidden="true"></div>
+  <div class="container">
+    <div class="hero-content">
 
-  <div class="container hero-content">
-    <!-- Fancy animated Qignite brand -->
-    <div class="qignite-brand-wrap">
-      <QigniteHero client:load />
-    </div>
+      <h1 class="hero-heading reveal-3d" style="transition-delay: 0.15s">
+        We Engineer<br />
+        <span class="text-accent" style="font-weight: 800;">Software Quality</span><br />
+        at Scale
+      </h1>
 
-    {sub && <p class="hero-sub reveal-3d" style="transition-delay: 0.8s">{sub}</p>}
+      <p class="hero-sub reveal-3d" style="transition-delay: 0.3s">
+        Intelligent QA and customer support solutions designed to catch bugs, reduce ticket volume, and help healthcare and enterprise teams ship with absolute confidence.
+      </p>
 
-    <div class="hero-ctas reveal-3d-up" style="transition-delay: 1.0s">
-      <a href={ctaPrimary.href} class="btn btn-primary">
-        {ctaPrimary.label}
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-      </a>
-      <a href={ctaSecondary.href} class="btn btn-outline">{ctaSecondary.label}</a>
+      <div class="hero-ctas reveal-3d-up" style="transition-delay: 0.45s">
+        <a href="/contact" class="btn btn-primary">
+          Get Started
+          <span class="btn-icon-circle">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </span>
+        </a>
+        <a href="/services" class="btn btn-outline">
+          Explore Services &rarr;
+        </a>
+      </div>
+
+      <!-- Floating trust badges -->
+      <div class="hero-badges reveal-3d" style="transition-delay: 0.6s">
+        <span class="trust-badge">✓ Healthcare Certified QA</span>
+        <span class="trust-badge">✓ AI-Driven Testing</span>
+        <span class="trust-badge">✓ 24/7 Support</span>
+      </div>
     </div>
   </div>
 
-  <div class="orb orb-1" aria-hidden="true"></div>
-  <div class="orb orb-2" aria-hidden="true"></div>
+  <!-- Decorative background shapes -->
+  <div class="hero-shape hero-shape-1" aria-hidden="true"></div>
+  <div class="hero-shape hero-shape-2" aria-hidden="true"></div>
+
 </section>
 
 <style>
@@ -50,53 +63,83 @@ const {
   display: flex;
   align-items: center;
   overflow: hidden;
+  background: var(--clr-bg);
 }
-.hero-overlay {
-  position: absolute; inset: 0; z-index: 1;
-  background:
-    linear-gradient(to right, var(--clr-bg) 0%, rgba(2,9,24,0.6) 60%, transparent 100%),
-    linear-gradient(to top, var(--clr-bg) 0%, transparent 40%);
-}
-.hero-grid {
-  position: absolute; inset: 0; z-index: 1;
-  background-image:
-    linear-gradient(var(--clr-border) 1px, transparent 1px),
-    linear-gradient(90deg, var(--clr-border) 1px, transparent 1px);
-  background-size: 60px 60px;
+.hero-bg {
+  position: absolute; inset: 0; z-index: 0;
+  background-image: radial-gradient(var(--clr-border) 1px, transparent 1px);
+  background-size: 40px 40px;
   opacity: 0.5;
-  mask-image: radial-gradient(ellipse 70% 80% at 50% 50%, black 30%, transparent 80%);
+  pointer-events: none;
+}
+.hero-bg::before {
+  content: ''; position: absolute; inset: 0;
+  background: radial-gradient(circle at 70% 50%, rgba(53, 203, 244, 0.05), transparent 60%);
 }
 .hero-content {
   position: relative; z-index: 2;
   padding-top: 9rem;
   padding-bottom: 6rem;
-  max-width: 900px;
+  max-width: 780px;
 }
-.qignite-brand-wrap {
-  position: relative;
-  margin-bottom: 1.75rem;
+
+.hero-heading {
+  font-family: var(--font-heading);
+  font-size: clamp(2.5rem, 6vw, 4.5rem);
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  line-height: 1.1;
+  color: #000;
+  margin-bottom: 1.5rem;
+  max-width: 800px;
 }
 .hero-sub {
-  font-size: clamp(1rem, 2vw, 1.2rem);
-  color: var(--clr-muted);
-  max-width: 540px;
-  line-height: 1.75;
+  font-size: clamp(1rem, 2vw, 1.15rem);
+  color: #444;
+  max-width: 580px;
+  line-height: 1.6;
   margin-bottom: 2.5rem;
 }
 .hero-ctas {
   display: flex; flex-wrap: wrap; gap: 1rem;
+  margin-bottom: 2.5rem;
+}
+.hero-badges {
+  display: flex; flex-wrap: wrap; gap: 0.75rem;
+}
+.trust-badge {
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: var(--clr-muted);
 }
 
-/* Orbs */
-.orb { position: absolute; border-radius: 50%; filter: blur(100px); pointer-events: none; z-index: 1; }
-.orb-1 { width: 600px; height: 600px; background: radial-gradient(circle, rgba(0,200,255,0.12), transparent 70%); top: -100px; right: -150px; animation: orbFloat 8s ease-in-out infinite; }
-.orb-2 { width: 400px; height: 400px; background: radial-gradient(circle, rgba(59,111,255,0.10), transparent 70%); bottom: 0; left: 30%; animation: orbFloat 10s 2s ease-in-out infinite reverse; }
+/* Background shapes */
+.hero-shape {
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 1;
+}
+.hero-shape-1 {
+  width: 700px; height: 700px;
+  background: radial-gradient(circle, rgba(0,153,204,0.06), transparent 70%);
+  top: -150px; right: -200px;
+  animation: shapeFloat 10s ease-in-out infinite;
+}
+.hero-shape-2 {
+  width: 450px; height: 450px;
+  background: radial-gradient(circle, rgba(59,111,255,0.05), transparent 70%);
+  bottom: -100px; left: 30%;
+  animation: shapeFloat 12s 3s ease-in-out infinite reverse;
+}
 
-@keyframes orbFloat {
+@keyframes shapeFloat {
   0%, 100% { transform: translateY(0) scale(1); }
-  50%        { transform: translateY(-30px) scale(1.05); }
+  50%       { transform: translateY(-25px) scale(1.03); }
 }
+
 @media (max-width: 640px) {
   .hero-content { padding-top: 7rem; }
+  .hero-heading { font-size: clamp(2.5rem, 10vw, 3.5rem); }
 }
 </style>

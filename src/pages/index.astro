@@ -35,13 +35,9 @@ const pageSchema = {
 
   <Stats />
 
-  <section class="section services-preview has-3d-bg parallax-section" aria-labelledby="services-heading" data-parallax="0.05">
-    <ParticleField client:visible />
-    <div class="bg-overlay" aria-hidden="true"></div>
-
-    <div class="container content-on-top">
+  <section class="section services-preview parallax-section" aria-labelledby="services-heading" data-parallax="0.05">
+    <div class="container">
       <div class="section-header reveal-3d-left" style="transition-delay: 0s">
-        <span class="section-tag">What We Do</span>
         <h2 class="display-md" id="services-heading">
           QA Solutions Built for <span class="text-accent">Modern Software</span>
         </h2>
@@ -59,10 +55,8 @@ const pageSchema = {
   </section>
 
   <section class="about-strip section parallax-section" aria-labelledby="about-strip-heading" data-parallax="0.03">
-    <WireframeGlobe client:visible size={10} opacity={0.07} />
     <div class="container about-strip-inner">
       <div class="about-strip-text reveal-3d-left" style="transition-delay: 0s">
-        <span class="section-tag">Our Mission</span>
         <h2 class="display-md" id="about-strip-heading">Quality is not optional. <span class="text-accent">It's the foundation.</span></h2>
         <p>We believe great software starts with rigorous quality assurance. At Qignite, we combine proven QA practices with cutting-edge AI tools — so your products are built right, shipped fast, and trusted at scale.</p>
         <a href="/about" class="btn btn-outline" style="margin-top:1.75rem;">Our Story →</a>
@@ -75,13 +69,9 @@ const pageSchema = {
     </div>
   </section>
 
-  <section class="section team-preview has-3d-bg parallax-section" aria-labelledby="team-preview-heading" data-parallax="0.04">
-    <ParticleField client:visible color="#3B6FFF" color2="#00C8FF" opacity={0.4} />
-    <div class="bg-overlay" aria-hidden="true"></div>
-
-    <div class="container content-on-top">
+  <section class="section team-preview parallax-section" aria-labelledby="team-preview-heading" data-parallax="0.04">
+    <div class="container">
       <div class="section-header centered reveal-3d" style="transition-delay: 0s">
-        <span class="section-tag">The People</span>
         <h2 class="display-md" id="team-preview-heading">Built by <span class="text-accent">Experts</span></h2>
         <p class="text-muted" style="margin-top:1rem; font-size:1rem; line-height:1.75;">
           A team of QA engineers and AI specialists passionate about shipping software that works.
@@ -105,7 +95,7 @@ const pageSchema = {
 .content-on-top { position: relative; z-index: 2; }
 .bg-overlay { 
   position: absolute; inset: 0; z-index: 1; 
-  background: linear-gradient(to bottom, var(--clr-bg) 0%, rgba(2,9,24,0.7) 50%, var(--clr-bg) 100%);
+  background: linear-gradient(to bottom, var(--clr-bg) 0%, rgba(247,248,250,0.6) 50%, var(--clr-bg) 100%);
 }
 
 /* Grids */
@@ -118,8 +108,16 @@ const pageSchema = {
 .about-strip-text { display: flex; flex-direction: column; gap: 1rem; }
 .about-strip-text p { color: var(--clr-muted); line-height: 1.75; }
 .about-strip-badges { display: flex; flex-wrap: wrap; gap: 0.75rem; align-content: flex-start; }
-.badge { padding: 0.5rem 1rem; border: 1px solid var(--clr-border); border-radius: 100px; font-size: 0.8rem; font-weight: 500; color: var(--clr-muted); background: var(--clr-bg-card); transition: all 0.2s; }
-.badge:hover { color: var(--clr-accent); border-color: var(--clr-accent); background: var(--clr-accent-dim); }
+.badge {
+  padding: 0.45rem 1rem; border: 1px solid var(--clr-border); border-radius: 100px;
+  font-size: 0.8rem; font-weight: 500; color: var(--clr-muted);
+  background: var(--clr-bg); transition: all 0.2s;
+}
+.badge:hover { color: var(--clr-accent); border-color: rgba(0,153,204,0.3); background: var(--clr-accent-dim); }
+
+/* Services preview section */
+.services-preview { background: var(--clr-bg); }
+.team-preview { background: var(--clr-bg-2); }
 
 @media (max-width: 900px) {
   .team-grid-preview { grid-template-columns: 1fr 1fr; }

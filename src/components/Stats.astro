@@ -51,11 +51,12 @@ const { stats = [
   position: relative;
   padding: 5rem 0;
   overflow: hidden;
+  background: var(--clr-bg-2);
 }
 .stats-bg {
   position: absolute; inset: 0;
   background:
-    radial-gradient(ellipse 80% 100% at 50% 50%, rgba(0,200,255,0.05), transparent);
+    radial-gradient(ellipse 80% 100% at 50% 50%, rgba(0,153,204,0.04), transparent);
   border-top: 1px solid var(--clr-border);
   border-bottom: 1px solid var(--clr-border);
   z-index: 0;
@@ -73,11 +74,10 @@ const { stats = [
   text-align: center;
   padding: 3rem 2rem;
   position: relative;
-  /* 3D hover effect */
-  transition: transform 0.4s var(--ease);
+  transition: transform 0.3s var(--ease);
 }
 .stat-item:hover {
-  transform: perspective(600px) translateY(-4px) scale(1.02) !important;
+  transform: translateY(-3px);
 }
 .stat-item:not(:last-child)::after {
   content: '';
@@ -87,19 +87,15 @@ const { stats = [
   background: var(--clr-border);
 }
 
-
-
 .stat-value { margin-bottom: 0.75rem; position: relative; z-index: 1; }
 .stat-num {
   font-family: var(--font-heading);
   font-size: clamp(2.5rem, 5vw, 4rem);
   font-weight: 800;
-  background: linear-gradient(135deg, var(--clr-text), var(--clr-accent));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  color: var(--clr-text);
   line-height: 1;
   display: inline-block;
+  letter-spacing: -0.03em;
 }
 .stat-num.counting {
   animation: statShake 0.05s linear infinite;

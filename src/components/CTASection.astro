@@ -29,10 +29,6 @@ const {
   <div class="cta-bg" aria-hidden="true"></div>
 
   <div class="container cta-inner">
-    <div class="cta-badge reveal-3d-scale" style="transition-delay: 0s">
-      <span class="cta-badge-dot" aria-hidden="true"></span>
-      Let's Build Together
-    </div>
     <h2 class="display-lg cta-headline reveal-3d" style="transition-delay: 0.1s">{headline}</h2>
     <p class="cta-sub reveal-3d" style="transition-delay: 0.2s">{sub}</p>
     <div class="cta-actions reveal-3d-up" style="transition-delay: 0.3s">
@@ -52,31 +48,22 @@ const {
   position: relative;
   text-align: center;
   overflow: hidden;
+  background: var(--clr-bg-2);
+  border-top: 1px solid var(--clr-border);
+  border-bottom: 1px solid var(--clr-border);
 }
 .cta-bg {
   position: absolute; inset: 0;
   background:
-    radial-gradient(ellipse 60% 80% at 50% 50%, rgba(0,200,255,0.08), transparent 70%),
-    radial-gradient(ellipse 40% 40% at 80% 20%, rgba(59,111,255,0.08), transparent);
+    radial-gradient(ellipse 60% 80% at 50% 50%, rgba(0,153,204,0.06), transparent 70%),
+    radial-gradient(ellipse 40% 40% at 80% 20%, rgba(59,111,255,0.05), transparent);
 }
 .cta-inner {
   position: relative; z-index: 1;
   max-width: 720px; margin: 0 auto;
   display: flex; flex-direction: column; align-items: center; gap: 1.5rem;
 }
-.cta-badge {
-  display: inline-flex; align-items: center; gap: 0.5rem;
-  font-size: 0.8rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase;
-  color: var(--clr-accent); padding: 0.4rem 1rem;
-  border: 1px solid var(--clr-border); border-radius: 100px;
-  background: var(--clr-accent-dim);
-}
-.cta-badge-dot {
-  width: 6px; height: 6px; border-radius: 50%;
-  background: var(--clr-accent);
-  animation: pulse 2s infinite;
-}
-.cta-headline { max-width: 620px; }
+.cta-headline { max-width: 620px; color: var(--clr-text); }
 .cta-sub {
   font-size: 1.05rem; color: var(--clr-muted); line-height: 1.7; max-width: 500px;
 }
