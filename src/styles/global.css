@@ -11,10 +11,10 @@
   --clr-bg-2: rgba(248, 249, 251, 0.3);
   --clr-bg-3: rgba(240, 243, 247, 0.3);
   --clr-bg-card: rgba(255, 255, 255, 0.85);
-  --clr-accent: #35cbf4;
-  --clr-accent-2: #20a8d8;
-  --clr-accent-dim: rgba(53, 203, 244, 0.1);
-  --clr-glow: rgba(53, 203, 244, 0.3);
+  --clr-accent: #6C5CE7;
+  --clr-accent-2: #5A4BC4;
+  --clr-accent-dim: rgba(108, 92, 231, 0.1);
+  --clr-glow: rgba(108, 92, 231, 0.3);
   --clr-text: #0F1117;
   --clr-muted: #64748B;
   --clr-border: rgba(0, 0, 0, 0.08);
@@ -50,6 +50,7 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+  -webkit-tap-highlight-color: transparent;
 }
 
 html {
@@ -119,7 +120,7 @@ select {
   position: fixed;
   top: 0;
   left: 0;
-  opacity: 0.1;
+  opacity: 0.2;
   width: 100vw;
   height: 100vh;
   object-fit: cover;

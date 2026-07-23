@@ -1,0 +1,200 @@
+Use the following prompt with Claude Code, Cursor, or another AI coding assistant:
+
+```text
+You are a senior UI/UX designer and Frontend Engineer with expertise in modern SaaS websites.
+
+Your task is to redesign my existing website by converting it from a dark theme to a clean, modern light theme while preserving the existing structure, layout, functionality, and responsiveness.
+
+Current Website:
+https://qignite-web.vercel.app/
+
+Design Inspiration:
+https://ziriumai.com/
+
+## Primary Goal
+
+Transform the website into a professional light-themed website similar in quality and aesthetics to Zirium AI, without redesigning the entire website. I want the website to feel like the same product, just with a much cleaner, brighter, and more premium appearance.
+
+## Important Requirements
+
+- Do NOT change the layout unless necessary for better visual balance.
+- Keep all existing sections.
+- Keep all functionality exactly the same.
+- Keep responsiveness intact.
+- Do NOT add unnecessary animations or fancy effects.
+- The overall look should be minimal, elegant, modern, and professional.
+
+## Theme Changes
+
+Convert the complete website to a light theme.
+
+Use a premium color palette such as:
+
+- White (#FFFFFF)
+- Off-white backgrounds
+- Very light gray section backgrounds
+- Dark charcoal text
+- Keep the existing brand accent color wherever appropriate.
+
+The design should feel similar to modern AI SaaS websites.
+
+## Typography
+
+Replace the current fonts with modern professional fonts.
+
+Preferred choices:
+
+- Plus Jakarta Sans
+- Inter
+- Manrope
+
+Choose whichever fits the design best.
+
+Use proper typography hierarchy:
+
+- Large clean headings
+- Comfortable paragraph spacing
+- Professional button typography
+- Consistent font weights throughout the website
+
+## Components
+
+Update all UI components to match the light theme:
+
+- Navbar
+- Hero section
+- Cards
+- Buttons
+- Forms
+- Footer
+- Inputs
+- Pricing cards
+- Service cards
+- Feature cards
+- Contact section
+- Backgrounds
+- Borders
+- Shadows
+
+Use subtle shadows and soft borders instead of heavy dark styling.
+
+## Hero Section
+
+The hero section should become cleaner and more professional.
+
+Specifically:
+
+- Remove the animation applied to the "QIGNITE" text.
+- Replace it with a clean static heading.
+- Improve spacing and typography.
+- Keep the same content.
+- Make it look elegant and premium.
+
+## Logo Update
+
+I have created a new folder that contains the new logo assets.
+
+The folder includes:
+
+- Logo with transparent background
+- Logo with background
+
+Replace the old logo everywhere on the website with the new logo.
+
+Choose whichever version (transparent or background) best suits each location.
+
+Ensure proper sizing, padding, and alignment.
+
+## Buttons
+
+Improve button styling:
+
+- Cleaner borders
+- Better hover states
+- Softer transitions
+- Consistent radius
+- Professional sizing
+
+Avoid flashy gradients unless already part of the branding.
+
+## Cards
+
+Improve every card by using:
+
+- Light backgrounds
+- Soft shadows
+- Better padding
+- Consistent spacing
+- Rounded corners
+- Better typography
+
+## Icons
+
+Keep existing icons if appropriate.
+
+If necessary, update icon colors so they fit the new light theme.
+
+## Navigation
+
+Keep the navigation simple and professional.
+
+Improve:
+
+- Active state
+- Hover state
+- Spacing
+- Logo alignment
+- Button styling
+
+## Footer
+
+Redesign the footer for the light theme while keeping the same content.
+
+Use:
+
+- Clean spacing
+- Light background
+- Better typography
+- Professional layout
+
+## Animations
+
+Reduce unnecessary animations throughout the site.
+
+Keep only subtle transitions such as:
+
+- Hover effects
+- Fade-ins where appropriate
+- Smooth color transitions
+
+Avoid distracting animations.
+
+## Code Quality
+
+While making UI changes:
+
+- Remove unused styles if encountered.
+- Keep the code clean and maintainable.
+- Follow best frontend practices.
+- Do not break existing functionality.
+
+## Accessibility
+
+Ensure:
+
+- Proper text contrast
+- Readable font sizes
+- Consistent spacing
+- Keyboard-friendly navigation
+- Good visual hierarchy
+
+## Final Goal
+
+The final website should feel like a premium AI SaaS company website.
+
+It should closely match the visual quality and professionalism of Zirium AI while preserving the identity, content, and overall structure of the current QIGNITE website.
+
+Focus on simplicity, elegance, readability, consistency, and professionalism rather than adding new design elements.
+
+Do not modify business logic or backend code—only improve the visual design and frontend styling.
+```
