@@ -1,5 +1,4 @@
 import { defineConfig } from 'astro/config';
-import tailwind from '@astrojs/tailwind';
 import react from '@astrojs/react';
 import sitemap from '@astrojs/sitemap';
 
@@ -12,10 +11,6 @@ const SITE_URL = process.env.SITE_URL || 'https://example.com';
 export default defineConfig({
   site: SITE_URL,
   integrations: [
-    tailwind({
-      // Prevents Astro from injecting default base styles if we want total control via global.css
-      applyBaseStyles: false,
-    }),
     react(),
     sitemap()
   ],

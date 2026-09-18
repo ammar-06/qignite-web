@@ -1,9 +1,6 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import CTASection from '../components/CTASection.astro';
-import ParticleField from '../components/ParticleField.tsx';
-import WireframeGlobe from '../components/WireframeGlobe.tsx';
-import GridPlane from '../components/GridPlane.tsx';
 
 const values = [
   { icon: '⚡', title: 'Precision First', desc: 'Every bug caught, every edge case explored. We don\'t ship guesses.' },
@@ -55,12 +52,12 @@ const pageSchema = {
   <section class="section mv-section parallax-section" aria-labelledby="mission-heading" data-parallax="0.04">
     <div class="container">
       <div class="mv-grid">
-        <div class="mv-card card reveal-3d-left" style="transition-delay:0s" data-tilt-about>
+        <div class="mv-card card reveal-3d-left" style="transition-delay:0s">
           <span class="mv-icon">🎯</span>
           <h2 id="mission-heading">Our Mission</h2>
           <p>To deliver intelligent, reliable quality assurance solutions that help healthcare and enterprise organizations ship software with confidence — combining proven QA practices with cutting-edge AI automation.</p>
         </div>
-        <div class="mv-card card reveal-3d-left" style="transition-delay:0.15s" data-tilt-about>
+        <div class="mv-card card reveal-3d-left" style="transition-delay:0.15s">
           <span class="mv-icon">🔭</span>
           <h2>Our Vision</h2>
           <p>A world where AI-powered quality engineering is accessible to every software team — where bugs are caught before they reach users, and software reliability is the default, not the exception.</p>

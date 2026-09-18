@@ -2,10 +2,10 @@
 import Layout from '../layouts/Layout.astro';
 import TeamCard from '../components/TeamCard.astro';
 import CTASection from '../components/CTASection.astro';
-import ParticleField from '../components/ParticleField.tsx';
 import WireframeGlobe from '../components/WireframeGlobe.tsx';
 import GridPlane from '../components/GridPlane.tsx';
 import { team } from '../data/team';
+import { LINKEDIN_URL } from '../data/site';
 
 const pageSchema = {
   '@context': 'https://schema.org',
@@ -113,7 +113,7 @@ const pageSchema = {
           Qignite provides networking opportunities for students and professionals in QA engineering, AI-integrated development, automation, and healthcare technology.
         </p>
         <div style="margin-top:2rem; display:flex; gap:1rem; justify-content:center; flex-wrap:wrap;">
-          <a href="https://www.linkedin.com/company/qignite/" target="_blank" rel="noopener noreferrer" class="btn btn-primary">Connect on LinkedIn</a>
+          <a href={LINKEDIN_URL} target="_blank" rel="noopener noreferrer" class="btn btn-primary">Connect on LinkedIn</a>
           <a href="/contact" class="btn btn-outline">Get in Touch</a>
         </div>
       </div>

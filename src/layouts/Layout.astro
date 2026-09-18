@@ -5,6 +5,7 @@ import Footer from '../components/Footer.astro';
 import SkeletonLoader from '../components/SkeletonLoader.astro';
 import ScrollParallax from '../components/ScrollParallax.astro';
 import { ClientRouter } from 'astro:transitions';
+import { LINKEDIN_URL } from '../data/site';
 
 interface Props {
   title: string;
@@ -39,7 +40,7 @@ const orgSchema = {
   url: siteUrl,
   logo: `${siteUrl}/android-chrome-192x192.png`,
   description: 'AI-driven software quality assurance company for healthcare and enterprise platforms.',
-  sameAs: ['https://www.linkedin.com/company/qignite/'],
+  sameAs: [LINKEDIN_URL],
   founder: { '@type': 'Person', name: 'Umair Nadeem' },
 };
 ---

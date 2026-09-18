@@ -1,4 +1,6 @@
 ---
+import { LINKEDIN_URL, UPWORK_URL, CONTACT_EMAIL } from '../data/site';
+
 const currentYear = new Date().getFullYear();
 
 const navLinks = [
@@ -35,7 +37,7 @@ const services = [
         </p>
         <div class="social-btns">
           <a
-            href="https://www.linkedin.com/company/qignite/"
+            href={LINKEDIN_URL}
             target="_blank"
             rel="noopener noreferrer"
             class="social-btn"
@@ -49,7 +51,7 @@ const services = [
             LinkedIn
           </a>
           <a
-            href="https://www.upwork.com/freelancers/umairnadeemqa?mp_source=share"
+            href={UPWORK_URL}
             target="_blank"
             rel="noopener noreferrer"
             class="social-btn upwork-btn"
@@ -99,8 +101,8 @@ const services = [
         <h3 class="footer-col-title">Contact</h3>
         <ul>
           <li>
-            <a href="mailto:qigniteops@gmail.com" class="footer-link"
-              >qigniteops@gmail.com</a
+            <a href={`mailto:${CONTACT_EMAIL}`} class="footer-link"
+              >{CONTACT_EMAIL}</a
             >
           </li>
           <li><a href="/contact" class="footer-link">Get in Touch</a></li>
