@@ -5,7 +5,7 @@ import Footer from '../components/Footer.astro';
 import SkeletonLoader from '../components/SkeletonLoader.astro';
 import ScrollParallax from '../components/ScrollParallax.astro';
 import { ClientRouter } from 'astro:transitions';
-import { LINKEDIN_URL } from '../data/site';
+import { LINKEDIN_URL, CONTACT_PHONE } from '../data/site';
 
 interface Props {
   title: string;
@@ -35,13 +35,21 @@ const canonicalURL = canonical ?? `${siteUrl}${Astro.url.pathname}`;
 
 const orgSchema = {
   '@context': 'https://schema.org',
-  '@type': 'Organization',
+  '@type': 'ProfessionalService',
   name: 'Qignite',
   url: siteUrl,
   logo: `${siteUrl}/android-chrome-192x192.png`,
   description: 'AI-driven software quality assurance company for healthcare and enterprise platforms.',
   sameAs: [LINKEDIN_URL],
   founder: { '@type': 'Person', name: 'Umair Nadeem' },
+  foundingDate: '2026-09-01',
+  telephone: CONTACT_PHONE,
+  address: {
+    '@type': 'PostalAddress',
+    streetAddress: 'FF#885-886, Deans Trade Center, Peshawar Saddar',
+    addressLocality: 'Peshawar',
+    addressCountry: 'PK',
+  },
 };
 ---
 <!DOCTYPE html>

@@ -1,5 +1,5 @@
 ---
-import { LINKEDIN_URL, UPWORK_URL, CONTACT_EMAIL } from '../data/site';
+import { LINKEDIN_URL, UPWORK_URL, CONTACT_EMAIL, CONTACT_PHONE, CONTACT_PHONE_TEL } from '../data/site';
 
 const currentYear = new Date().getFullYear();
 
@@ -103,6 +103,11 @@ const services = [
           <li>
             <a href={`mailto:${CONTACT_EMAIL}`} class="footer-link"
               >{CONTACT_EMAIL}</a
+            >
+          </li>
+          <li>
+            <a href={`tel:${CONTACT_PHONE_TEL}`} class="footer-link"
+              >{CONTACT_PHONE}</a
             >
           </li>
           <li><a href="/contact" class="footer-link">Get in Touch</a></li>
