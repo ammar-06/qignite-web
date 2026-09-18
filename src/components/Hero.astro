@@ -6,9 +6,9 @@ interface Props {
 }
 
 const {
-  sub,
-  ctaPrimary  = { label: 'Explore Services', href: '/services' },
-  ctaSecondary = { label: 'Meet the Team', href: '/team' },
+  sub = 'Intelligent QA and customer support solutions designed to catch bugs, reduce ticket volume, and help healthcare and enterprise teams ship with absolute confidence.',
+  ctaPrimary = { label: 'Get Started', href: '/contact' },
+  ctaSecondary = { label: 'Explore Services', href: '/services' },
 } = Astro.props;
 ---
 
@@ -26,18 +26,18 @@ const {
       </h1>
 
       <p class="hero-sub reveal-3d" style="transition-delay: 0.3s">
-        Intelligent QA and customer support solutions designed to catch bugs, reduce ticket volume, and help healthcare and enterprise teams ship with absolute confidence.
+        {sub}
       </p>
 
       <div class="hero-ctas reveal-3d-up" style="transition-delay: 0.45s">
-        <a href="/contact" class="btn btn-primary">
-          Get Started
+        <a href={ctaPrimary.href} class="btn btn-primary">
+          {ctaPrimary.label}
           <span class="btn-icon-circle">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
           </span>
         </a>
-        <a href="/services" class="btn btn-outline">
-          Explore Services &rarr;
+        <a href={ctaSecondary.href} class="btn btn-outline">
+          {ctaSecondary.label} &rarr;
         </a>
       </div>
 

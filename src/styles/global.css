@@ -7,11 +7,12 @@
 /* ─── CSS VARIABLES ─── */
 :root {
   /* Colors — Light Theme (Zirium Match & Transparent for Video BG) */
-  --clr-bg: --clr-white;
+  --clr-bg: var(--clr-white);
   --clr-bg-2: rgba(248, 249, 251, 0.3);
   --clr-bg-3: rgba(240, 243, 247, 0.3);
   --clr-bg-card: rgba(255, 255, 255, 0.85);
   --clr-accent: #6C5CE7;
+  --clr-accent-btn: #7C6EEA;
   --clr-accent-2: #5A4BC4;
   --clr-accent-dim: rgba(108, 92, 231, 0.1);
   --clr-glow: rgba(108, 92, 231, 0.3);
@@ -225,7 +226,7 @@ h6 {
 }
 
 .btn-primary {
-  background: var(--clr-accent);
+  background: var(--clr-accent-btn);
   color: #000;
   border: 1px solid transparent;
   box-shadow: 0 8px 24px rgba(53, 203, 244, 0.2);

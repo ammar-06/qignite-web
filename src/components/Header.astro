@@ -73,13 +73,14 @@ const current = Astro.url.pathname;
         navLinks.map((link) => (
           <a
             href={link.href}
+            tabindex="-1"
             class:list={["nav-link-mobile", { active: current === link.href }]}
           >
             {link.label}
           </a>
         ))
       }
-      <a href="/contact" class="btn btn-primary" style="margin-top:1rem;"
+      <a href="/contact" class="btn btn-primary" tabindex="-1" style="margin-top:1rem;"
         >Get in Touch</a
       >
     </div>
@@ -149,6 +150,7 @@ const current = Astro.url.pathname;
     padding: 0.6rem 1.4rem;
     font-size: 0.9rem;
     border-radius: 50px;
+    min-height: 44px;
   }
   .nav-cta {
     margin-left: 1rem;
@@ -157,7 +159,11 @@ const current = Astro.url.pathname;
   .hamburger {
     display: none;
     flex-direction: column;
+    justify-content: center;
+    align-items: center;
     gap: 5px;
+    min-width: 44px;
+    min-height: 44px;
     padding: 8px;
     margin-left: auto;
   }
@@ -245,6 +251,13 @@ const current = Astro.url.pathname;
         navMobile!.classList.toggle("open", open);
         hamburger!.setAttribute("aria-expanded", String(open));
         navMobile!.setAttribute("aria-hidden", String(!open));
+        navMobile!.querySelectorAll("a").forEach((link) => {
+          if (open) {
+            link.removeAttribute("tabindex");
+          } else {
+            link.setAttribute("tabindex", "-1");
+          }
+        });
       });
     }
   }
