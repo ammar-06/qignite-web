@@ -53,7 +53,7 @@ const orgSchema = {
   <link rel="icon" type="image/x-icon" href="/favicon.ico" />
   <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
   <link rel="manifest" href="/site.webmanifest" />
-  <meta name="theme-color" content="#FFFFFF" />
+  <meta name="theme-color" content="#6C5CE7" />
 
   <title>{fullTitle}</title>
   <meta name="description" content={description} />
@@ -85,10 +85,26 @@ const orgSchema = {
   {structuredData && <script is:inline type="application/ld+json" set:html={JSON.stringify(structuredData)} />}
 </head>
 <body>
-  <!-- Global Video Background -->
-  <video class="global-video-bg" autoplay loop muted playsinline>
-    <source src="/videos/final_bg.mp4" type="video/mp4" />
-  </video>
+  <!-- Global Video Background — gated to >=768px; a static gradient
+       fallback covers mobile so the 12MB video never loads there -->
+  <div class="global-bg-fallback" aria-hidden="true"></div>
+  <video class="global-video-bg" id="global-bg-video" autoplay loop muted playsinline aria-hidden="true"></video>
+  <script>
+    function initGlobalVideo() {
+      if (!window.matchMedia('(min-width: 768px)').matches) return;
+      const video = document.getElementById('global-bg-video') as HTMLVideoElement | null;
+      if (!video || video.querySelector('source')) return;
+      const source = document.createElement('source');
+      source.src = '/videos/final_bg.mp4';
+      source.type = 'video/mp4';
+      video.appendChild(source);
+      video.load();
+      video.play().catch(() => {});
+      video.classList.add('active');
+    }
+    initGlobalVideo();
+    document.addEventListener('astro:page-load', initGlobalVideo);
+  </script>
 
   <!-- Skeleton Loader — shows instantly, fades out on load -->
   <SkeletonLoader />

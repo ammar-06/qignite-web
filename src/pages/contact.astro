@@ -1,6 +1,5 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import ThreeScene from '../components/ThreeScene.tsx';
 import ParticleField from '../components/ParticleField.tsx';
 
 const pageSchema = {
@@ -19,7 +18,6 @@ const pageSchema = {
   structuredData={pageSchema}
 >
   <section class="page-hero section has-3d" aria-labelledby="contact-heading">
-    <ThreeScene client:visible />
     <div class="page-hero-bg" aria-hidden="true"></div>
     <div class="container rel">
       <h1 class="contact-hero-heading reveal-3d" id="contact-heading" style="transition-delay:0.1s">

@@ -1,8 +1,8 @@
 /* ============================================
    QIGNITE — GLOBAL DESIGN SYSTEM (LIGHT THEME)
    ============================================ */
-
-@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap');
+/* Google Fonts is loaded once via <link> in Layout.astro's <head>
+   (with preconnect) rather than here, to avoid a duplicate request. */
 
 /* ─── CSS VARIABLES ─── */
 :root {
@@ -117,16 +117,29 @@ select {
 }
 
 /* ─── GLOBAL VIDEO BG ─── */
+.global-bg-fallback {
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse 80% 60% at 50% 30%, rgba(108, 92, 231, 0.08), transparent 70%),
+    var(--clr-bg);
+}
 .global-video-bg {
   position: fixed;
   top: 0;
   left: 0;
-  opacity: 0.2;
+  opacity: 0;
   width: 100vw;
   height: 100vh;
   object-fit: cover;
   z-index: -1;
   pointer-events: none;
+  transition: opacity 0.6s ease;
+}
+.global-video-bg.active {
+  opacity: 0.2;
 }
 
 /* ─── CONTAINER ─── */

@@ -2,7 +2,6 @@
 import Layout from '../layouts/Layout.astro';
 import ServiceCard from '../components/ServiceCard.astro';
 import CTASection from '../components/CTASection.astro';
-import ThreeScene from '../components/ThreeScene.tsx';
 import ParticleField from '../components/ParticleField.tsx';
 import GridPlane from '../components/GridPlane.tsx';
 import WireframeGlobe from '../components/WireframeGlobe.tsx';
@@ -74,7 +73,6 @@ const pageSchema = {
 
   <!-- PAGE HERO -->
   <section class="page-hero section has-3d" aria-labelledby="services-heading">
-    <ThreeScene client:visible />
     <div class="page-hero-bg" aria-hidden="true"></div>
     <div class="container rel">
       <h1 class="services-hero-heading reveal-3d" id="services-heading" style="transition-delay:0.1s">
