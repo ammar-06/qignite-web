@@ -27,7 +27,7 @@ const pageSchema = {
   '@context': 'https://schema.org',
   '@type': 'AboutPage',
   name: 'About Qignite — AI-Driven QA Company',
-  url: 'https://qignite.com/about',
+  url: Astro.site ? `${Astro.site.origin}/about` : 'https://example.com/about',
   description: 'Learn about Qignite\'s mission, values, and journey building AI-powered quality assurance solutions.',
 };
 ---

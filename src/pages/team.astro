@@ -12,7 +12,7 @@ const pageSchema = {
   '@context': 'https://schema.org',
   '@type': 'WebPage',
   name: 'Qignite Team — Meet Our Experts',
-  url: 'https://qignite.com/team',
+  url: Astro.site ? `${Astro.site.origin}/team` : 'https://example.com/team',
   description: 'Meet the QA engineers and AI specialists behind Qignite.',
   mainEntity: {
     '@type': 'ItemList',

@@ -28,7 +28,7 @@ const {
   noindex = false,
 } = Astro.props;
 
-const siteUrl  = 'https://qignite.com';
+const siteUrl = Astro.site?.origin ?? 'https://example.com';
 const fullTitle = title.includes('Qignite') ? title : `${title} | Qignite`;
 const canonicalURL = canonical ?? `${siteUrl}${Astro.url.pathname}`;
 

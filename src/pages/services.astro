@@ -54,7 +54,7 @@ const pageSchema = {
   '@context': 'https://schema.org',
   '@type': 'WebPage',
   name: 'Qignite Services — AI QA and Testing Solutions',
-  url: 'https://qignite.com/services',
+  url: Astro.site ? `${Astro.site.origin}/services` : 'https://example.com/services',
   description: 'Explore Qignite\'s AI-powered QA services including automated testing, healthcare QA, and enterprise quality engineering.',
   mainEntity: services.map(s => ({
     '@type': 'Service',

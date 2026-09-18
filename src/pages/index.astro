@@ -17,7 +17,7 @@ const pageSchema = {
   '@type': 'WebPage',
   name: 'Qignite — AI-Driven QA Solutions',
   description: 'AI-driven software quality assurance for healthcare and enterprise platforms.',
-  url: 'https://qignite.com/',
+  url: Astro.site ? `${Astro.site.origin}/` : 'https://example.com/',
 };
 ---
 

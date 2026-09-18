@@ -15,6 +15,7 @@
   "description": "",
   "dependencies": {
     "@astrojs/react": "^5.0.5",
+    "@astrojs/sitemap": "^3.7.4",
     "@astrojs/tailwind": "^6.0.2",
     "@types/three": "^0.184.1",
     "astro": "^5.0.0",

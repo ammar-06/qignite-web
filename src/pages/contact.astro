@@ -7,7 +7,7 @@ const pageSchema = {
   '@context': 'https://schema.org',
   '@type': 'ContactPage',
   name: 'Contact Qignite',
-  url: 'https://qignite.com/contact',
+  url: Astro.site ? `${Astro.site.origin}/contact` : 'https://example.com/contact',
   description: 'Get in touch with Qignite for AI-powered QA solutions and consulting.',
 };
 ---
